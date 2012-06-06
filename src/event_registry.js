@@ -1,7 +1,6 @@
 /*global window, document, WHITEBOARD */
 (function () {
   "use strict";
-  var ns = "http://www.w3.org/2000/svg";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
   WHITEBOARD.createEventRegistry = function () {

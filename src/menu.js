@@ -3,12 +3,12 @@
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
-  WHITEBOARD.createMenu = function(app, events) {
+  WHITEBOARD.createMenu = function (app, events) {
     var menuEl = app.addHtmlElement('div', 'menu'),
     link = app.addHtmlElement('a', 'square', menuEl),
     self = Object.create(events);
 
-    link.addEventListener('click', function() {
+    link.addEventListener('click', function () {
       events.fire('beginSquareCreation');
     });
 

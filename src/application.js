@@ -7,7 +7,7 @@
   WHITEBOARD.createApplication = function (container, context) {
     var canvas = context.createElementNS(ns, 'svg'),
     self = {
-      addHtmlElement: function(type, id, parent) {
+      addHtmlElement: function (type, id, parent) {
         var el = context.createElement(type);
         el.setAttribute('id', id);
         (parent || container).appendChild(el);

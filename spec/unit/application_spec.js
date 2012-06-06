@@ -3,15 +3,15 @@
 (function () {
   "use strict";
 
-  describe("unit: application", function() {
+  describe("unit: application", function () {
     var container;
 
-    beforeEach(function() {
+    beforeEach(function () {
       spyOn(WHITEBOARD, 'createMenu');
       container = document.createElement('div');
     });
 
-    it("allows adding of HTML elements", function() {
+    it("allows adding of HTML elements", function () {
       var element,
       application = WHITEBOARD.createApplication(
         container, document
@@ -23,7 +23,7 @@
       expect(jQuery(element).attr('id')).toEqual('menu');
     });
 
-    it("can nest new HTML elements within others", function() {
+    it("can nest new HTML elements within others", function () {
       var element,
       parentEl = document.createElement('div'),
       application = WHITEBOARD.createApplication(

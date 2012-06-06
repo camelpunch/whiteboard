@@ -4,7 +4,7 @@
   var ns = "http://www.w3.org/2000/svg";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
-  WHITEBOARD.createEventRegistry = function() {
+  WHITEBOARD.createEventRegistry = function () {
     var listeners = [];
 
     return {

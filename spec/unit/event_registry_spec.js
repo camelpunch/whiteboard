@@ -2,8 +2,8 @@
 (function () {
   "use strict";
 
-  describe("unit: event registry", function() {
-    it("notifies subscribers about registered events", function() {
+  describe("unit: event registry", function () {
+    it("notifies subscribers about registered events", function () {
       var listener = jasmine.createSpyObj(
         'listener', ['sleep', 'goFish', 'unwind']
       ),

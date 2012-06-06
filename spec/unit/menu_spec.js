@@ -2,10 +2,10 @@
 (function () {
   "use strict";
 
-  describe("unit: menu", function() {
+  describe("unit: menu", function () {
     var app, registry;
 
-    beforeEach(function() {
+    beforeEach(function () {
       app = jasmine.createSpyObj(
         'app', ['addHtmlElement', 'addSvgElement']
       );
@@ -13,18 +13,18 @@
       app.addHtmlElement.andReturn(document.createElement('div'));
     });
 
-    it("adds a menu element", function() {
+    it("adds a menu element", function () {
       WHITEBOARD.createMenu(app, registry);
       expect(app.addHtmlElement).toHaveBeenCalledWith('div', 'menu');
     });
 
-    it("exposes the event registry interface", function() {
+    it("exposes the event registry interface", function () {
       var menu = WHITEBOARD.createMenu(app, registry);
       expect(menu.tells).toBe(registry.tells);
     });
 
-    describe("square menu item", function() {
-      it("is a link inside the menu element", function() {
+    describe("square menu item", function () {
+      it("is a link inside the menu element", function () {
         var menuEl = document.createElement('div');
 
         app.addHtmlElement.andReturn(menuEl);
@@ -36,10 +36,10 @@
         );
       });
 
-      it("fires a beginSquareCreation event on click", function() {
+      it("fires a beginSquareCreation event on click", function () {
         var link = document.createElement('a'), menu;
 
-        app.addHtmlElement.andCallFake(function(type, id) {
+        app.addHtmlElement.andCallFake(function (type, id) {
           if (id === 'square') {
             return link;
           }

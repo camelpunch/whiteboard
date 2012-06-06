@@ -1,29 +1,23 @@
-/*global window, document */
+/*global window, document, WHITEBOARD */
 (function () {
   "use strict";
+  var ns = "http://www.w3.org/2000/svg";
+  window.WHITEBOARD = window.WHITEBOARD || {};
 
-  window.WHITEBOARD = {
-    createApplication: function (container, context) {
-      var ns = "http://www.w3.org/2000/svg",
-      canvas = context.createElementNS(ns, 'svg'),
-      menu = context.createElement('div'),
-      squareMenuItem = context.createElement('a'),
-      rect = context.createElementNS(ns, 'rect');
+  WHITEBOARD.createApplication = function (container, context) {
+    var canvas = context.createElementNS(ns, 'svg'),
+    self = {
+      addHtmlElement: function(type, id, parent) {
+        var el = context.createElement(type);
+        el.setAttribute('id', id);
+        (parent || container).appendChild(el);
+        return el;
+      }
+    };
 
-      menu.setAttribute('id', 'menu');
-      squareMenuItem.setAttribute('id', 'square');
+    canvas.setAttribute('id', 'canvas');
+    container.appendChild(canvas);
 
-      rect.setAttribute('width', '500');
-      rect.setAttribute('height', '500');
-
-      canvas.setAttribute('id', 'canvas');
-
-      menu.appendChild(squareMenuItem);
-
-      canvas.appendChild(rect);
-
-      container.appendChild(menu);
-      container.appendChild(canvas);
-    }
+    return self;
   }
 }());

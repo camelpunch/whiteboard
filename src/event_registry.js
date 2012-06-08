@@ -1,4 +1,5 @@
-/*global window, document, WHITEBOARD */
+/*jslint indent: 2, browser: true */
+/*global WHITEBOARD */
 (function () {
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};
@@ -13,6 +14,7 @@
           listener: listener,
           message: options.to
         });
+        return this;
       },
 
       fire: function (event) {

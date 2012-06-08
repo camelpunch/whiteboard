@@ -7,10 +7,20 @@
 
 <body>
   <h1>Whiteboard</h1>
-  <div id="app"></div>
+  <div id="menu"><a id="square">Make square</a></div>
+  <svg id="canvas" xmlns="http://www.w3.org/2000/svg">
+  </svg>
+  <script type="text/javascript" src="lib/jquery-1.7.2.js"></script>
   <script type="text/javascript" src="src/menu.js"></script>
-  <script type="text/javascript" src="src/application.js"></script>
+  <script type="text/javascript" src="src/dimensions.js"></script>
+  <script type="text/javascript" src="src/square_plotter.js"></script>
   <script type="text/javascript" src="src/event_registry.js"></script>
   <script type="text/javascript" src="src/object_graph.js"></script>
+  <script type="text/javascript">
+    WHITEBOARD.createObjectGraph(
+      document.getElementById('menu'),
+      document.getElementById('canvas')
+    );
+  </script>
 </body>
 </html>

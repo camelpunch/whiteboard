@@ -1,36 +1,23 @@
+/*jslint indent: 2, browser: true */
 /*global describe, it, beforeEach, expect, WHITEBOARD, jQuery, document */
 (function () {
   "use strict";
 
   describe("acceptance: square", function () {
-    it("has a menu item", function () {
-      var graph, container, menu, startPosition, endPosition, canvas;
-
-      container = document.createElement('div');
-      graph = WHITEBOARD.createObjectGraph(container);
-
-      menu = jQuery('#menu', container);
-      canvas = jQuery('#canvas', container);
-
-      expect(menu).toExist();
-      expect(canvas).toExist();
-      expect(menu.find('a#square')).toExist();
-    });
-
     describe("when drawn using a menu item", function () {
-      var application, container, menu, startPosition, endPosition, canvas;
+      var container, menuEl, startPosition, endPosition, canvasEl,
+        ns = "http://www.w3.org/2000/svg";
 
       beforeEach(function () {
-        container = jQuery('<div>')[0];
-        application = WHITEBOARD.createApplication(container, document);
+        menuEl = jQuery('<div><a id="square"/></div>');
+        canvasEl = jQuery(document.createElementNS(ns, 'svg'));
 
-        menu = jQuery('#menu', container);
-        canvas = jQuery('#canvas', container);
+        WHITEBOARD.createObjectGraph(menuEl[0], canvasEl[0]);
 
-        menu.find('#square').click();
+        jQuery(menuEl).find('#square').click();
 
         startPosition = {
-          offsetX: 4,
+          offsetX: 2,
           offsetY: 8
         };
 
@@ -39,18 +26,17 @@
           offsetY: 28
         };
 
-        canvas.trigger(jQuery.Event('mousedown', startPosition));
-        canvas.trigger(jQuery.Event('mouseup', endPosition));
+        canvasEl.trigger(jQuery.Event('mousedown', startPosition));
+        canvasEl.trigger(jQuery.Event('mouseup', endPosition));
       });
 
       it("exists", function () {
-        expect(canvas.find('rect')).toExist();
+        expect(canvasEl.find('rect')).toExist();
       });
 
-      it("has width and height relative to mouse movement", function () {
-        expect(canvas.find('rect').attr('width')).toBe(
-          endPosition.offsetX - startPosition.offsetX
-        );
+      it("has dimensions relative to mouse movement", function () {
+        expect(canvasEl.find('rect'))
+          .toHaveDimensions(WHITEBOARD.createDimensions(2, 8, 12, 20));
       });
     });
   });

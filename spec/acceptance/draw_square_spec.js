@@ -36,7 +36,7 @@
 
       it("has dimensions relative to mouse movement", function () {
         expect(canvasEl.find('rect'))
-          .toHaveDimensions(WHITEBOARD.createDimensions(2, 8, 12, 20));
+          .toHaveDimensions(WHITEBOARD.createDimensions(2, 8, 20, 20));
       });
     });
   });

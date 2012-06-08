@@ -5,7 +5,7 @@
 
   describe("unit: square plotter", function () {
     it("draws a square using mouse events", function () {
-      var expectedDimensions = WHITEBOARD.createDimensions(4, 8, 10, 20),
+      var expectedDimensions = WHITEBOARD.createDimensions(4, 8, 20, 20),
         ns = "http://www.w3.org/2000/svg",
         canvas = jQuery(document.createElementNS(ns, 'svg')),
         plotter = WHITEBOARD.createSquarePlotter(canvas[0], document),

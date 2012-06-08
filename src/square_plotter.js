@@ -5,12 +5,18 @@
   window.WHITEBOARD = window.WHITEBOARD || {};
 
   WHITEBOARD.createSquarePlotter = function (el, context) {
-    var self,
+    var self, width, height,
       ns = "http://www.w3.org/2000/svg";
 
     self = {
       start: function () {
-        var rect, x, y;
+        var rect, x, y,
+          eventWidth = function (e) {
+            return e.offsetX - x;
+          },
+          eventHeight = function (e) {
+            return e.offsetY - y;
+          };
 
         rect = context.createElementNS(ns, 'rect');
 
@@ -22,8 +28,9 @@
             rect.setAttribute('y', e.offsetY);
           })
           .mouseup(function (e) {
-            rect.setAttribute('width', e.offsetX - x);
-            rect.setAttribute('height', e.offsetY - y);
+            var side = Math.max(eventWidth(e), eventHeight(e));
+            rect.setAttribute('width', side);
+            rect.setAttribute('height', side);
             el.appendChild(rect);
           });
       }

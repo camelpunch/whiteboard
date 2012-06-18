@@ -8,7 +8,7 @@
         var expectedDimensions = WHITEBOARD.createDimensions(4, 8, 0, 0),
           ns = "http://www.w3.org/2000/svg",
           canvas = jQuery(document.createElementNS(ns, 'svg')),
-          plotter = WHITEBOARD.createSquarePlotter(canvas[0], document),
+          plotter = WHITEBOARD.createSquarePlotter(canvas[0]),
           rect;
 
         rect = canvas.find('rect');

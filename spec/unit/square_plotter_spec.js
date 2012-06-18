@@ -22,7 +22,7 @@
       });
 
       it("changes width / height when resized", function () {
-        var expectedDimensions = WHITEBOARD.createDimensions(2, 6, 8, 14),
+        var expectedDimensions = WHITEBOARD.createDimensions(2, 6, 14, 14),
           ns = "http://www.w3.org/2000/svg",
           canvas = jQuery(document.createElementNS(ns, 'svg')),
           plotter = WHITEBOARD.createSquarePlotter(canvas[0], document),

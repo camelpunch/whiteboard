@@ -23,12 +23,13 @@
       },
 
       resize: function (right, bottom) {
+        var side = Math.max(right - x, bottom - y);
         el.removeChild(rect);
         rect = context.createElementNS(ns, 'rect');
         rect.setAttribute('x', x);
         rect.setAttribute('y', y);
-        rect.setAttribute('width', right - x);
-        rect.setAttribute('height', bottom - y);
+        rect.setAttribute('width', side);
+        rect.setAttribute('height', side);
         el.appendChild(rect);
       }
     };

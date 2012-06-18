@@ -62,6 +62,7 @@
       jQuery(el).trigger(mousemove);
       jQuery(el).trigger(mouseup);
       registry.fire.reset();
+      jQuery(el).trigger(mousedown);
       jQuery(el).trigger(mousemove);
       expect(registry.fire).not.toHaveBeenCalled();
     });

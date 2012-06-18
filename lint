@@ -1,2 +1,11 @@
 #!/bin/bash
-jslint src/*.js spec/**/*.js spec/*.js
+jslint \
+  --indent 2 \
+  --browser \
+  --predef jasmine \
+  --predef describe \
+  --predef it \
+  --predef beforeEach \
+  --predef expect \
+  --predef jQuery \
+  src/*.js spec/**/*.js spec/*.js

@@ -1,5 +1,4 @@
-/*jslint indent: 2, browser: true */
-/*global jasmine, describe, it, beforeEach, expect, WHITEBOARD, jQuery */
+/*global WHITEBOARD */
 (function () {
   "use strict";
 

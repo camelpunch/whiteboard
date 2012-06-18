@@ -1,5 +1,4 @@
-/*jslint indent: 2, browser: true*/
-/*global WHITEBOARD, jQuery*/
+/*global WHITEBOARD */
 (function () {
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};

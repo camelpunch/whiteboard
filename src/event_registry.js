@@ -1,4 +1,3 @@
-/*jslint indent: 2, browser: true */
 /*global WHITEBOARD */
 (function () {
   "use strict";

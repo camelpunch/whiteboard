@@ -1,5 +1,3 @@
-/*jslint indent: 2, browser: true */
-/*global beforeEach, jQuery */
 (function () {
   "use strict";
   beforeEach(function () {

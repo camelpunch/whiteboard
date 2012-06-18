@@ -5,38 +5,33 @@
   window.WHITEBOARD = window.WHITEBOARD || {};
 
   WHITEBOARD.createSquarePlotter = function (el, context) {
-    var self, width, height,
+    var self, x, y, width, height, rect,
       ns = "http://www.w3.org/2000/svg";
 
     self = {
-      start: function () {
-        var rect, x, y,
-          eventWidth = function (e) { return e.offsetX - x; },
-          eventHeight = function (e) { return e.offsetY - y; };
+      beginDrawing: function (startX, startY) {
+        width = 0;
+        height = 0;
+        x = startX;
+        y = startY;
 
         rect = context.createElementNS(ns, 'rect');
-
-        jQuery(el)
-          .on('mousedown', function (e) {
-            if (!rect) {
-              jQuery(el)
-                .off('mousedown')
-                .off('mouseup');
-              return;
-            }
-            x = e.offsetX;
-            y = e.offsetY;
-            rect.setAttribute('x', e.offsetX);
-            rect.setAttribute('y', e.offsetY);
-          })
-          .on('mouseup', function (e) {
-            var side = Math.max(eventWidth(e), eventHeight(e));
-            rect.setAttribute('width', side);
-            rect.setAttribute('height', side);
-            el.appendChild(rect);
-            rect = undefined;
-          });
+        rect.setAttribute('x', x);
+        rect.setAttribute('y', y);
+        rect.setAttribute('width', width);
+        rect.setAttribute('height', height);
+        el.appendChild(rect);
       },
+
+      resize: function (right, bottom) {
+        el.removeChild(rect);
+        rect = context.createElementNS(ns, 'rect');
+        rect.setAttribute('x', x);
+        rect.setAttribute('y', y);
+        rect.setAttribute('width', right - x);
+        rect.setAttribute('height', bottom - y);
+        el.appendChild(rect);
+      }
     };
     return self;
   };

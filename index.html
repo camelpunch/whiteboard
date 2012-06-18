@@ -1,18 +1,21 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-  "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
   <title>Whiteboard</title>
+  <link rel="Stylesheet" type="text/css" href="styles.css" />
 </head>
 
 <body>
   <h1>Whiteboard</h1>
-  <div id="menu"><a id="square">Make square</a></div>
+  <menu id="menu">
+    <button id="square">Make square</button>
+  </menu>
   <svg id="canvas" xmlns="http://www.w3.org/2000/svg">
   </svg>
   <script type="text/javascript" src="lib/jquery-1.7.2.js"></script>
   <script type="text/javascript" src="src/menu.js"></script>
   <script type="text/javascript" src="src/dimensions.js"></script>
+  <script type="text/javascript" src="src/mouse_vector.js"></script>
   <script type="text/javascript" src="src/square_plotter.js"></script>
   <script type="text/javascript" src="src/event_registry.js"></script>
   <script type="text/javascript" src="src/object_graph.js"></script>

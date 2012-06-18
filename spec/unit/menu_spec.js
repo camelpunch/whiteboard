@@ -21,14 +21,14 @@
     });
 
     describe("square menu item", function () {
-      it("fires a squareSelect event on click", function () {
+      it("fires a select event on click", function () {
         var menu,
           menuEl = jQuery('<div><a id="square"/></div>');
 
         menu = WHITEBOARD.createMenu(menuEl, registry);
 
         jQuery('#square', menuEl).click();
-        expect(registry.fire).toHaveBeenCalledWith('squareSelect');
+        expect(registry.fire).toHaveBeenCalledWith('select');
       });
     });
   });

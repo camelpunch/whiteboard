@@ -6,8 +6,15 @@
 
   WHITEBOARD.createObjectGraph = function (menuEl, canvasEl) {
     var menu = WHITEBOARD.createMenu(menuEl, WHITEBOARD.createEventRegistry()),
-      squarePlotter = WHITEBOARD.createSquarePlotter(canvasEl, document);
+      mouseVector = WHITEBOARD.createMouseVector(canvasEl, WHITEBOARD.createEventRegistry()),
+      plotter = WHITEBOARD.createSquarePlotter(canvasEl, document);
 
-    menu.tells(squarePlotter, { to: 'start', on: 'squareSelect' });
+    menu
+      .tells(mouseVector, { to: 'waitForInput', on: 'select' });
+
+    mouseVector
+      .tells(plotter, { to: 'beginDrawing', on: 'start' })
+      .tells(plotter, { to: 'resize', on: 'tick' })
+      .tells(plotter, { to: 'resize', on: 'complete' });
   };
 }());

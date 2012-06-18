@@ -4,61 +4,40 @@
   "use strict";
 
   describe("unit: square plotter", function () {
-    describe("starting", function () {
-      it("draws a square using mouse events", function () {
-        var expectedDimensions = WHITEBOARD.createDimensions(4, 8, 20, 20),
+    describe("drawing", function () {
+      it("begins at a point with 0 width / height", function () {
+        var expectedDimensions = WHITEBOARD.createDimensions(4, 8, 0, 0),
           ns = "http://www.w3.org/2000/svg",
           canvas = jQuery(document.createElementNS(ns, 'svg')),
           plotter = WHITEBOARD.createSquarePlotter(canvas[0], document),
-          startPosition,
-          endPosition,
           rect;
-
-        startPosition = { offsetX: 4, offsetY: 8 };
-        endPosition = { offsetX: 14, offsetY: 28 };
-
-        plotter.start();
-
-        canvas.trigger(jQuery.Event('mousedown', startPosition));
 
         rect = canvas.find('rect');
         expect(rect).not.toExist();
 
-        canvas.trigger(jQuery.Event('mouseup', endPosition));
+        plotter.beginDrawing(4, 8);
 
         rect = canvas.find('rect');
         expect(rect).toExist();
         expect(rect).toHaveDimensions(expectedDimensions);
       });
-    });
 
-    describe("stopping", function () {
-      it("clears any previously drawn square", function () {
-        var expectedDimensions = WHITEBOARD.createDimensions(4, 8, 20, 20),
+      it("changes width / height when resized", function () {
+        var expectedDimensions = WHITEBOARD.createDimensions(2, 6, 8, 14),
           ns = "http://www.w3.org/2000/svg",
           canvas = jQuery(document.createElementNS(ns, 'svg')),
           plotter = WHITEBOARD.createSquarePlotter(canvas[0], document),
-          startPosition,
-          endPosition,
           rect;
 
-        startPosition = { offsetX: 4, offsetY: 8 };
-        endPosition = { offsetX: 14, offsetY: 28 };
+        plotter.beginDrawing(2, 6);
 
-        plotter.start();
-
-        canvas.trigger(jQuery.Event('mousedown', startPosition));
-        canvas.trigger(jQuery.Event('mouseup', endPosition));
-
+        plotter.resize(10, 20);
         rect = canvas.find('rect');
-        expect(rect).toExist();
+        expect(rect).toHaveDimensions(expectedDimensions);
 
-        canvas.trigger(jQuery.Event('mousedown', startPosition));
+        plotter.resize(10, 20);
         rect = canvas.find('rect');
-        expect(rect.length).toBe(1);
-        canvas.trigger(jQuery.Event('mouseup', endPosition));
-        rect = canvas.find('rect');
-        expect(rect.length).toBe(1);
+        expect(rect).toHaveDimensions(expectedDimensions);
       });
     });
   });

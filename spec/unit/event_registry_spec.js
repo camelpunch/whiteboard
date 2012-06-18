@@ -14,12 +14,12 @@
         .tells(listener, { to: 'goFish', on: 'squareCreated' })
         .tells(listener, { to: 'unwind', on: 'circleCreated' });
 
-      registry.fire('squareCreated');
+      registry.fire('squareCreated', 'myarg1', 'myarg2');
 
       listener.goFish.andCallFake(function () {
-        expect(listener.sleep).toHaveBeenCalled();
+        expect(listener.sleep).toHaveBeenCalledWith('myarg1', 'myarg2');
       });
-      expect(listener.goFish).toHaveBeenCalled();
+      expect(listener.goFish).toHaveBeenCalledWith('myarg1', 'myarg2');
       expect(listener.unwind).not.toHaveBeenCalled();
     });
   });

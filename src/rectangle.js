@@ -4,8 +4,8 @@
   window.WHITEBOARD = window.WHITEBOARD || {};
 
   WHITEBOARD.createRectangle = function (container, dimensions) {
-    var ns = "http://www.w3.org/2000/svg",
-      rect = document.createElementNS(ns, 'rect');
+    var namespace = "http://www.w3.org/2000/svg",
+      rect = document.createElementNS(namespace, 'rect');
 
     rect.setAttribute('x', dimensions.x);
     rect.setAttribute('y', dimensions.y);

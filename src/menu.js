@@ -9,7 +9,7 @@
     self = { tells: events.tells };
 
     link.click(function () {
-      events.fire('select');
+      events.fire('select', 'square');
     });
 
     return self;

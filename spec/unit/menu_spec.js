@@ -27,7 +27,7 @@
         menu = WHITEBOARD.createMenu(menuEl, registry);
 
         jQuery('#square', menuEl).click();
-        expect(registry.fire).toHaveBeenCalledWith('select');
+        expect(registry.fire).toHaveBeenCalledWith('select', 'square');
       });
     });
   });

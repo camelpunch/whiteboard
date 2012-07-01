@@ -1,8 +1,8 @@
-/*global WHITEBOARD */
+/*global WHITEBOARD, xdescribe */
 (function () {
   "use strict";
 
-  describe("acceptance: draw square", function () {
+  describe("acceptance: square", function () {
     describe("when drawn using a menu item", function () {
       var container, menuEl, startPosition, middlePosition, endPosition,
         canvasEl, ns = "http://www.w3.org/2000/svg";
@@ -28,7 +28,7 @@
         expect(canvasEl.find('rect')).toExist();
       });
 
-      it("has dimensions relative to mouse movement", function () {
+      it("has dimensions relative to mouse, constrained to a square", function () {
         expect(canvasEl.find('rect'))
           .toHaveDimensions(WHITEBOARD.createDimensions(2, 8, 20, 20));
       });

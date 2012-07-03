@@ -30,5 +30,18 @@
         expect(registry.fire).toHaveBeenCalledWith('select', 'square');
       });
     });
+
+    describe("rectangle menu item", function () {
+      it("fires a select event on click", function () {
+        var menu,
+          menuEl = jQuery('<div><a id="rectangle"/></div>');
+
+        menu = WHITEBOARD.createMenu(menuEl, registry);
+
+        jQuery('#rectangle', menuEl).click();
+        expect(registry.fire).toHaveBeenCalledWith('select', 'rectangle');
+      });
+
+    });
   });
 }());

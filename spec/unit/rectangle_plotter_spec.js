@@ -2,13 +2,13 @@
 (function () {
   "use strict";
 
-  describe("unit: square plotter", function () {
+  describe("unit: rectangle plotter", function () {
     describe("drawing", function () {
       it("begins at a point with 0 width / height", function () {
         var expectedDimensions = WHITEBOARD.createDimensions(4, 8, 0, 0),
           ns = "http://www.w3.org/2000/svg",
           canvas = jQuery(document.createElementNS(ns, 'svg')),
-          plotter = WHITEBOARD.createSquarePlotter(canvas[0]),
+          plotter = WHITEBOARD.createRectanglePlotter(canvas[0]),
           rect;
 
         rect = canvas.find('rect');
@@ -21,11 +21,11 @@
         expect(rect).toHaveDimensions(expectedDimensions);
       });
 
-      it("changes width / height when resized, contrained to a square", function () {
-        var expectedDimensions = WHITEBOARD.createDimensions(2, 6, 14, 14),
+      it("changes width / height when resized", function () {
+        var expectedDimensions = WHITEBOARD.createDimensions(2, 6, 8, 14),
           ns = "http://www.w3.org/2000/svg",
           canvas = jQuery(document.createElementNS(ns, 'svg')),
-          plotter = WHITEBOARD.createSquarePlotter(canvas[0], document),
+          plotter = WHITEBOARD.createRectanglePlotter(canvas[0], document),
           rect;
 
         plotter.beginDrawing(2, 6);

@@ -9,7 +9,8 @@
       menu = WHITEBOARD.createMenu(menuEl, events()),
       mouseVector = WHITEBOARD.createMouseVector(canvasEl, events()),
       plotter = WHITEBOARD.createPlottingManager({
-        square: WHITEBOARD.createSquarePlotter(canvasEl, document)
+        square: WHITEBOARD.createSquarePlotter(canvasEl, document),
+        rectangle: WHITEBOARD.createRectanglePlotter(canvasEl, document)
       });
 
     menu

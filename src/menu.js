@@ -4,12 +4,18 @@
   window.WHITEBOARD = window.WHITEBOARD || {};
 
   WHITEBOARD.createMenu = function (menuEl, events) {
-    var self, link = jQuery('#square', menuEl);
+    var self,
+      squareLink = jQuery('#square', menuEl),
+      rectangleLink = jQuery('#rectangle', menuEl);
 
     self = { tells: events.tells };
 
-    link.click(function () {
+    squareLink.click(function () {
       events.fire('select', 'square');
+    });
+
+    rectangleLink.click(function () {
+      events.fire('select', 'rectangle');
     });
 
     return self;

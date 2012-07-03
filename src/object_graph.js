@@ -10,7 +10,8 @@
       mouseVector = WHITEBOARD.createMouseVector(canvasEl, events()),
       plotter = WHITEBOARD.createPlottingManager({
         square: WHITEBOARD.createSquarePlotter(canvasEl, document),
-        rectangle: WHITEBOARD.createRectanglePlotter(canvasEl, document)
+        rectangle: WHITEBOARD.createRectanglePlotter(canvasEl, document),
+        ellipse: WHITEBOARD.createEllipsePlotter(canvasEl, document)
       });
 
     menu

@@ -41,7 +41,18 @@
         jQuery('#rectangle', menuEl).click();
         expect(registry.fire).toHaveBeenCalledWith('select', 'rectangle');
       });
+    });
 
+    describe("ellipse menu item", function () {
+      it("fires a select event on click", function () {
+        var menu,
+          menuEl = jQuery('<div><a id="ellipse"/></div>');
+
+        menu = WHITEBOARD.createMenu(menuEl, registry);
+
+        jQuery('#ellipse', menuEl).click();
+        expect(registry.fire).toHaveBeenCalledWith('select', 'ellipse');
+      });
     });
   });
 }());

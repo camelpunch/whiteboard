@@ -2,68 +2,103 @@
 (function () {
   "use strict";
 
-  describe("acceptance: square", function () {
-    describe("when drawn using a menu item", function () {
-      var container, menuEl, startPosition, middlePosition, endPosition,
-        canvasEl, ns = "http://www.w3.org/2000/svg";
+  describe("acceptance: drawing", function () {
+    var canvasEl, ns = "http://www.w3.org/2000/svg";
 
-      beforeEach(function () {
-        menuEl = jQuery('<menu><button id="square">Gimme a square</button></menu>');
-        canvasEl = jQuery(document.createElementNS(ns, 'svg'));
+    beforeEach(function () {
+      canvasEl = jQuery(document.createElementNS(ns, 'svg'));
+    });
 
-        WHITEBOARD.createObjectGraph(menuEl[0], canvasEl[0]);
+    describe("square", function () {
+      describe("using a menu item", function () {
+        var menuEl, startPosition, middlePosition, endPosition;
 
-        jQuery(menuEl).find('#square').click();
+        beforeEach(function () {
+          menuEl = jQuery('<menu><button id="square">Gimme a square</button></menu>');
 
-        startPosition = { offsetX: 2, offsetY: 8 };
-        middlePosition = { offsetX: 9, offsetY: 16 };
-        endPosition = { offsetX: 14, offsetY: 28 };
+          WHITEBOARD.createObjectGraph(menuEl[0], canvasEl[0]);
 
-        canvasEl.trigger(jQuery.Event('mousedown', startPosition));
-        canvasEl.trigger(jQuery.Event('mousemove', middlePosition));
-        canvasEl.trigger(jQuery.Event('mouseup', endPosition));
-      });
+          jQuery(menuEl).find('#square').click();
 
-      it("exists", function () {
-        expect(canvasEl.find('rect')).toExist();
-      });
+          startPosition = { offsetX: 2, offsetY: 8 };
+          middlePosition = { offsetX: 9, offsetY: 16 };
+          endPosition = { offsetX: 14, offsetY: 28 };
 
-      it("has dimensions relative to mouse, constrained to a square", function () {
-        expect(canvasEl.find('rect'))
-          .toHaveDimensions(WHITEBOARD.createDimensions(2, 8, 20, 20));
+          canvasEl.trigger(jQuery.Event('mousedown', startPosition));
+          canvasEl.trigger(jQuery.Event('mousemove', middlePosition));
+          canvasEl.trigger(jQuery.Event('mouseup', endPosition));
+        });
+
+        it("exists", function () {
+          expect(canvasEl.find('rect')).toExist();
+        });
+
+        it("has dimensions relative to mouse, constrained to a square", function () {
+          expect(canvasEl.find('rect'))
+            .toHaveDimensions(WHITEBOARD.createDimensions(2, 8, 20, 20));
+        });
       });
     });
-  });
 
-  describe("acceptance: rectangle", function () {
-    describe("when drawn using a menu item", function () {
-      var container, menuEl, startPosition, middlePosition, endPosition,
-        canvasEl, ns = "http://www.w3.org/2000/svg";
+    describe("rectangle", function () {
+      describe("using a menu item", function () {
+        var menuEl, startPosition, middlePosition, endPosition;
 
-      beforeEach(function () {
-        menuEl = jQuery('<menu><button id="rectangle">Gimme a rectangle</button></menu>');
-        canvasEl = jQuery(document.createElementNS(ns, 'svg'));
+        beforeEach(function () {
+          menuEl = jQuery('<menu><button id="rectangle">Gimme a rectangle</button></menu>');
 
-        WHITEBOARD.createObjectGraph(menuEl[0], canvasEl[0]);
+          WHITEBOARD.createObjectGraph(menuEl[0], canvasEl[0]);
 
-        jQuery(menuEl).find('#rectangle').click();
+          jQuery(menuEl).find('#rectangle').click();
 
-        startPosition = { offsetX: 2, offsetY: 8 };
-        middlePosition = { offsetX: 9, offsetY: 16 };
-        endPosition = { offsetX: 14, offsetY: 28 };
+          startPosition = { offsetX: 2, offsetY: 8 };
+          middlePosition = { offsetX: 9, offsetY: 16 };
+          endPosition = { offsetX: 14, offsetY: 28 };
 
-        canvasEl.trigger(jQuery.Event('mousedown', startPosition));
-        canvasEl.trigger(jQuery.Event('mousemove', middlePosition));
-        canvasEl.trigger(jQuery.Event('mouseup', endPosition));
+          canvasEl.trigger(jQuery.Event('mousedown', startPosition));
+          canvasEl.trigger(jQuery.Event('mousemove', middlePosition));
+          canvasEl.trigger(jQuery.Event('mouseup', endPosition));
+        });
+
+        it("exists", function () {
+          expect(canvasEl.find('rect')).toExist();
+        });
+
+        it("has dimensions relative to mouse", function () {
+          expect(canvasEl.find('rect'))
+            .toHaveDimensions(WHITEBOARD.createDimensions(2, 8, 12, 20));
+        });
       });
+    });
 
-      it("exists", function () {
-        expect(canvasEl.find('rect')).toExist();
-      });
+    describe("ellipse", function () {
+      describe("using a menu item", function () {
+        var menuEl, startPosition, middlePosition, endPosition;
 
-      it("has dimensions relative to mouse", function () {
-        expect(canvasEl.find('rect'))
-          .toHaveDimensions(WHITEBOARD.createDimensions(2, 8, 12, 20));
+        beforeEach(function () {
+          menuEl = jQuery('<menu><button id="ellipse">Gimme an ellipse</button></menu>');
+
+          WHITEBOARD.createObjectGraph(menuEl[0], canvasEl[0]);
+
+          jQuery(menuEl).find('#ellipse').click();
+
+          startPosition = { offsetX: 20, offsetY: 30 };
+          middlePosition = { offsetX: 9, offsetY: 16 };
+          endPosition = { offsetX: 30, offsetY: 45 };
+
+          canvasEl.trigger(jQuery.Event('mousedown', startPosition));
+          canvasEl.trigger(jQuery.Event('mousemove', middlePosition));
+          canvasEl.trigger(jQuery.Event('mouseup', endPosition));
+        });
+
+        it("exists", function () {
+          expect(canvasEl.find('ellipse')).toExist();
+        });
+
+        it("has dimensions relative to mouse", function () {
+          expect(canvasEl.find('ellipse'))
+            .toHaveEllipseDimensions(WHITEBOARD.createDimensions(20, 30, 10, 15));
+        });
       });
     });
   });

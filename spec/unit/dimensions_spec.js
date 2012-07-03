@@ -6,9 +6,11 @@
     it("is comparable with other dimensions objects", function () {
       var a = WHITEBOARD.createDimensions(10, 20, 67, 545),
         b = WHITEBOARD.createDimensions(10, 20, 67, 545),
-        c = WHITEBOARD.createDimensions(10, 20, 67, 546);
+        c = WHITEBOARD.createDimensions(10, 20, 67, 546),
+        d = WHITEBOARD.createDimensions(77, 566, -67, -546);
       expect(a.equals(b)).toBeTruthy();
       expect(a.equals(c)).toBeFalsy();
+      expect(c.equals(d)).toBeTruthy();
     });
 
     it("has read-only properties for x, y, width and height", function () {
@@ -36,6 +38,14 @@
       expect(dims.toString()).toEqual(
         'x: 23, y: 43, 67x545'
       );
+    });
+
+    it("accepts negative width / height, uses to recalculate origin", function () {
+      var dims = WHITEBOARD.createDimensions(30, 50, -10, -20);
+      expect(dims.x).toBe(20);
+      expect(dims.y).toBe(30);
+      expect(dims.width).toBe(10);
+      expect(dims.height).toBe(20);
     });
   });
 }());

@@ -19,51 +19,45 @@
       expect(menu.fire).toBeUndefined();
     });
 
-    describe("square menu item", function () {
-      it("fires a select event on click", function () {
-        var menu,
-          menuEl = jQuery('<div><a id="square"/></div>');
+    describe("items", function () {
+      var menuEl, menu;
 
-        menu = WHITEBOARD.createMenu(menuEl, registry);
-
-        jQuery('#square', menuEl).click();
-        expect(registry.fire).toHaveBeenCalledWith('select', 'square');
+      beforeEach(function () {
+        menuEl = jQuery('<div>' +
+                        '<button id="square"/>' +
+                        '<button id="rectangle"/>' +
+                        '<button id="circle"/>' +
+                        '<button id="ellipse"/>' +
+                        '</div>');
+        menu = WHITEBOARD.createMenu(menuEl[0], registry);
       });
-    });
 
-    describe("rectangle menu item", function () {
-      it("fires a select event on click", function () {
-        var menu,
-          menuEl = jQuery('<div><a id="rectangle"/></div>');
-
-        menu = WHITEBOARD.createMenu(menuEl, registry);
-
-        jQuery('#rectangle', menuEl).click();
-        expect(registry.fire).toHaveBeenCalledWith('select', 'rectangle');
+      describe("square", function () {
+        it("fires a select event on click", function () {
+          jQuery('#square', menuEl).click();
+          expect(registry.fire).toHaveBeenCalledWith('select', 'square');
+        });
       });
-    });
 
-    describe("circle menu item", function () {
-      it("fires a select event on click", function () {
-        var menu,
-          menuEl = jQuery('<div><a id="circle"/></div>');
-
-        menu = WHITEBOARD.createMenu(menuEl, registry);
-
-        jQuery('#circle', menuEl).click();
-        expect(registry.fire).toHaveBeenCalledWith('select', 'circle');
+      describe("rectangle", function () {
+        it("fires a select event on click", function () {
+          jQuery('#rectangle', menuEl).click();
+          expect(registry.fire).toHaveBeenCalledWith('select', 'rectangle');
+        });
       });
-    });
 
-    describe("ellipse menu item", function () {
-      it("fires a select event on click", function () {
-        var menu,
-          menuEl = jQuery('<div><a id="ellipse"/></div>');
+      describe("circle", function () {
+        it("fires a select event on click", function () {
+          jQuery('#circle', menuEl).click();
+          expect(registry.fire).toHaveBeenCalledWith('select', 'circle');
+        });
+      });
 
-        menu = WHITEBOARD.createMenu(menuEl, registry);
-
-        jQuery('#ellipse', menuEl).click();
-        expect(registry.fire).toHaveBeenCalledWith('select', 'ellipse');
+      describe("ellipse", function () {
+        it("fires a select event on click", function () {
+          jQuery('#ellipse', menuEl).click();
+          expect(registry.fire).toHaveBeenCalledWith('select', 'ellipse');
+        });
       });
     });
   });

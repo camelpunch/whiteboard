@@ -12,11 +12,15 @@
         square: WHITEBOARD.createConstrainedPlotter(
           WHITEBOARD.createRectangleFactory(canvasEl)
         ),
-        rectangle: WHITEBOARD.createRectanglePlotter(canvasEl),
+        rectangle: WHITEBOARD.createUnconstrainedPlotter(
+          WHITEBOARD.createRectangleFactory(canvasEl)
+        ),
         circle: WHITEBOARD.createConstrainedPlotter(
           WHITEBOARD.createEllipseFactory(canvasEl)
         ),
-        ellipse: WHITEBOARD.createEllipsePlotter(canvasEl)
+        ellipse: WHITEBOARD.createUnconstrainedPlotter(
+          WHITEBOARD.createEllipseFactory(canvasEl)
+        )
       });
 
     menu

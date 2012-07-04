@@ -3,25 +3,24 @@
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
-  WHITEBOARD.createRectanglePlotter = function (el) {
-    var self, x, y, rectangle;
+  WHITEBOARD.createUnconstrainedPlotter = function (factory) {
+    var x, y, shape;
 
-    self = {
+    return {
       beginDrawing: function (startX, startY) {
         x = startX;
         y = startY;
-        rectangle = WHITEBOARD.createRectangleFactory(el).build(
+        shape = factory.build(
           WHITEBOARD.createDimensions(startX, startY, 0, 0)
         );
       },
 
       resize: function (right, bottom) {
-        rectangle.destroy();
-        rectangle = WHITEBOARD.createRectangleFactory(el).build(
+        shape.destroy();
+        shape = factory.build(
           WHITEBOARD.createDimensions(x, y, right - x, bottom - y)
         );
       }
     };
-    return self;
   };
 }());

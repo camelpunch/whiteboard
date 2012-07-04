@@ -43,6 +43,18 @@
       });
     });
 
+    describe("circle menu item", function () {
+      it("fires a select event on click", function () {
+        var menu,
+          menuEl = jQuery('<div><a id="circle"/></div>');
+
+        menu = WHITEBOARD.createMenu(menuEl, registry);
+
+        jQuery('#circle', menuEl).click();
+        expect(registry.fire).toHaveBeenCalledWith('select', 'circle');
+      });
+    });
+
     describe("ellipse menu item", function () {
       it("fires a select event on click", function () {
         var menu,

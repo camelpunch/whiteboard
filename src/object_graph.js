@@ -11,6 +11,7 @@
       plotter = WHITEBOARD.createPlottingManager({
         square: WHITEBOARD.createSquarePlotter(canvasEl, document),
         rectangle: WHITEBOARD.createRectanglePlotter(canvasEl, document),
+        circle: WHITEBOARD.createCirclePlotter(canvasEl, document),
         ellipse: WHITEBOARD.createEllipsePlotter(canvasEl, document)
       });
 

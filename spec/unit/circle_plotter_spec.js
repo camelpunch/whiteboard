@@ -2,14 +2,14 @@
 (function () {
   "use strict";
 
-  describe("unit: ellipse plotter", function () {
+  describe("unit: circle plotter", function () {
     var namespace = "http://www.w3.org/2000/svg";
 
     describe("drawing", function () {
       it("begins at a point with 0 width / height", function () {
         var expectedDimensions = WHITEBOARD.createDimensions(4, 8, 0, 0),
           canvas = jQuery(document.createElementNS(namespace, 'svg')),
-          plotter = WHITEBOARD.createEllipsePlotter(canvas[0]),
+          plotter = WHITEBOARD.createCirclePlotter(canvas[0]),
           shape;
 
         shape = canvas.find('ellipse');
@@ -23,9 +23,9 @@
       });
 
       it("changes width / height when resized", function () {
-        var expectedDimensions = WHITEBOARD.createDimensions(2, 6, 8, 14),
+        var expectedDimensions = WHITEBOARD.createDimensions(2, 6, 14, 14),
           canvas = jQuery(document.createElementNS(namespace, 'svg')),
-          plotter = WHITEBOARD.createEllipsePlotter(canvas[0], document),
+          plotter = WHITEBOARD.createCirclePlotter(canvas[0], document),
           shape;
 
         plotter.beginDrawing(2, 6);

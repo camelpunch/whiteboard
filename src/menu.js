@@ -7,6 +7,7 @@
     var self,
       squareLink = jQuery('#square', menuEl),
       rectangleLink = jQuery('#rectangle', menuEl),
+      circleLink = jQuery('#circle', menuEl),
       ellipseLink = jQuery('#ellipse', menuEl);
 
     self = { tells: events.tells };
@@ -17,6 +18,10 @@
 
     rectangleLink.click(function () {
       events.fire('select', 'rectangle');
+    });
+
+    circleLink.click(function () {
+      events.fire('select', 'circle');
     });
 
     ellipseLink.click(function () {

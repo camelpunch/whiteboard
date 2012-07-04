@@ -70,6 +70,26 @@
       });
     });
 
+    describe("circle", function () {
+      describe("using a menu item", function () {
+        var startPosition, middlePosition, endPosition;
+
+        beforeEach(function () {
+          choose('circle');
+          drag([20, 30], [9, 16], [30, 45]);
+        });
+
+        it("exists", function () {
+          expect(canvasEl.find('ellipse')).toExist();
+        });
+
+        it("has dimensions relative to mouse", function () {
+          expect(canvasEl.find('ellipse'))
+            .toHaveEllipseDimensions(WHITEBOARD.createDimensions(20, 30, 15, 15));
+        });
+      });
+    });
+
     describe("ellipse", function () {
       describe("using a menu item", function () {
         var startPosition, middlePosition, endPosition;

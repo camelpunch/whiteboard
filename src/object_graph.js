@@ -5,7 +5,7 @@
 
   WHITEBOARD.createObjectGraph = function (menuEl, canvasEl) {
     var events = function () { return WHITEBOARD.createEventRegistry(); },
-      canvas = WHITEBOARD.createCanvasManager(canvasEl),
+      canvas = WHITEBOARD.createCanvas(canvasEl),
       menu = WHITEBOARD.createMenu(menuEl, events()),
       mouseVector = WHITEBOARD.createMouseVector(canvasEl, events()),
       plotter = WHITEBOARD.createPlottingManager({

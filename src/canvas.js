@@ -3,7 +3,7 @@
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
-  WHITEBOARD.createCanvasManager = function (canvasEl) {
+  WHITEBOARD.createCanvas = function (canvasEl) {
     var jQueryCanvasEl = jQuery(canvasEl);
 
     return {

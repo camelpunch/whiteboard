@@ -8,7 +8,7 @@
       canvas = WHITEBOARD.createCanvas(canvasEl),
       menu = WHITEBOARD.createMenu(menuEl, events()),
       mouseVector = WHITEBOARD.createMouseVector(canvasEl, events()),
-      plotter = WHITEBOARD.createPlottingManager({
+      plotters = WHITEBOARD.createPlotterCollection({
         square: WHITEBOARD.createConstrainedPlotter(
           WHITEBOARD.createRectangleFactory(canvasEl)
         ),
@@ -24,14 +24,14 @@
       });
 
     menu
-      .tells(plotter, { to: 'switch', on: 'select' })
+      .tells(plotters, { to: 'switch', on: 'select' })
       .tells(mouseVector, { to: 'waitForInput', on: 'select' })
       .tells(canvas, { to: 'enterDrawState', on: 'select' });
 
     mouseVector
-      .tells(plotter, { to: 'beginDrawing', on: 'start' })
-      .tells(plotter, { to: 'resize', on: 'tick' })
-      .tells(plotter, { to: 'resize', on: 'complete' })
+      .tells(plotters.current, { to: 'beginDrawing', on: 'start' })
+      .tells(plotters.current, { to: 'resize', on: 'tick' })
+      .tells(plotters.current, { to: 'resize', on: 'complete' })
       .tells(canvas, { to: 'exitDrawState', on: 'complete' });
   };
 }());

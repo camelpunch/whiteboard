@@ -21,5 +21,19 @@
       expect(listener.goFish).toHaveBeenCalledWith('myarg1', 'myarg2');
       expect(listener.unwind).not.toHaveBeenCalled();
     });
+
+    it("can notify the result of a function", function () {
+      var listenerFunction = jasmine.createSpy('listener function'),
+        listenerObject = jasmine.createSpyObj('listener object', ['sleep', 'goFish', 'unwind']),
+        registry = WHITEBOARD.createEventRegistry();
+
+      registry.tells(listenerFunction,
+                     { to: 'sleep', on: 'squareCreated' });
+
+      listenerFunction.andReturn(listenerObject);
+      registry.fire('squareCreated', 'myarg1', 'myarg2');
+
+      expect(listenerObject.sleep).toHaveBeenCalledWith('myarg1', 'myarg2');
+    });
   });
 }());

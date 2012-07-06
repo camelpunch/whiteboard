@@ -6,13 +6,15 @@
   WHITEBOARD.createDimensions = function (x, y, width, height) {
     var inverseX = width < 0,
       inverseY = height < 0,
+      realX = inverseX ? x + width : x,
+      realY = inverseY ? y + height : y,
       self = Object.create({}, {
         x: {
-          value: inverseX ? x + width : x,
+          value: realX,
           enumerable: true
         },
         y: {
-          value: inverseY ? y + height : y,
+          value: realY,
           enumerable: true
         },
         width: {

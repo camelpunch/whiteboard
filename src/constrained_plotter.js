@@ -20,14 +20,16 @@
           distanceSouth = bottom - originY,
           distanceWest = -distanceEast,
           distanceNorth = -distanceSouth,
-          northWest = distanceNorth > 0 && distanceWest > 0,
           furthestNorthWest = Math.min(distanceEast, distanceSouth),
           furthestSouthEast = Math.max(distanceEast, distanceSouth),
-          southWest = distanceWest > 0 && distanceSouth > 0,
+          northWest = distanceNorth > 0 && distanceWest > 0,
+          southWest = distanceSouth > 0 && distanceWest > 0,
           northEast = distanceNorth > 0 && distanceEast > 0,
+          southEast = distanceSouth > 0 && distanceEast > 0,
           westSouthWest = southWest && distanceWest > distanceSouth,
           southSouthWest = southWest && distanceSouth > distanceWest,
           northNorthEast = northEast && distanceNorth > distanceEast,
+          eastNorthEast = northEast && distanceEast > distanceNorth,
           resizeTo = function (x, y) {
             if (!y) {
               y = x;
@@ -40,18 +42,21 @@
 
         if (northWest) {
           resizeTo(furthestNorthWest);
-        } else if (westSouthWest) {
-          resizeTo(distanceEast, distanceWest);
-        } else if (southSouthWest) {
-          resizeTo(distanceNorth, distanceSouth);
-        } else if (southWest) {
-          resizeTo(distanceSouth, distanceNorth);
-        } else if (northNorthEast) {
-          resizeTo(distanceNorth, distanceSouth);
-        } else if (northEast) {
-          resizeTo(distanceEast, distanceWest);
-        } else {
+        }
+        if (southEast) {
           resizeTo(furthestSouthEast);
+        }
+        if (westSouthWest) {
+          resizeTo(distanceEast, distanceWest);
+        }
+        if (southSouthWest) {
+          resizeTo(distanceNorth, distanceSouth);
+        }
+        if (northNorthEast) {
+          resizeTo(distanceNorth, distanceSouth);
+        }
+        if (eastNorthEast) {
+          resizeTo(distanceEast, distanceWest);
         }
       }
     };

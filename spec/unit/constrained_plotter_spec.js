@@ -15,7 +15,13 @@
     });
 
     describe("resizing", function () {
-      var plotter, factory;
+      var plotter, factory,
+        expectWidthHeight = function (width, height) {
+          expect(factory.build.callCount).toBe(1);
+          expect(factory.build).toHaveBeenCalledWith(
+            WHITEBOARD.createDimensions(20, 20, width, height)
+          );
+        };
 
       beforeEach(function () {
         var shape = jasmine.createSpyObj('shape', ['destroy']);
@@ -30,58 +36,42 @@
 
       it("uses distance north when north-north-east", function () {
         plotter.resize(21, 5);
-        expect(factory.build).toHaveBeenCalledWith(
-          WHITEBOARD.createDimensions(20, 20, 15, -15)
-        );
+        expectWidthHeight(15, -15);
       });
 
       it("uses distance east when east-north-east", function () {
         plotter.resize(35, 19);
-        expect(factory.build).toHaveBeenCalledWith(
-          WHITEBOARD.createDimensions(20, 20, 15, -15)
-        );
+        expectWidthHeight(15, -15);
       });
 
       it("uses distance south if south-south-east", function () {
         plotter.resize(30, 21);
-        expect(factory.build).toHaveBeenCalledWith(
-          WHITEBOARD.createDimensions(20, 20, 10, 10)
-        );
+        expectWidthHeight(10, 10);
       });
 
       it("uses distance east if east-south-east", function () {
         plotter.resize(21, 30);
-        expect(factory.build).toHaveBeenCalledWith(
-          WHITEBOARD.createDimensions(20, 20, 10, 10)
-        );
+        expectWidthHeight(10, 10);
       });
 
       it("uses distance west when west-south-west", function () {
         plotter.resize(10, 25);
-        expect(factory.build).toHaveBeenCalledWith(
-          WHITEBOARD.createDimensions(20, 20, -10, 10)
-        );
+        expectWidthHeight(-10, 10);
       });
 
       it("uses distance south when south-south-west", function () {
         plotter.resize(10, 35);
-        expect(factory.build).toHaveBeenCalledWith(
-          WHITEBOARD.createDimensions(20, 20, -15, 15)
-        );
+        expectWidthHeight(-15, 15);
       });
 
       it("uses distance west when west-north-west", function () {
         plotter.resize(5, 10);
-        expect(factory.build).toHaveBeenCalledWith(
-          WHITEBOARD.createDimensions(20, 20, -15, -15)
-        );
+        expectWidthHeight(-15, -15);
       });
 
       it("uses distance north when north-north-west", function () {
         plotter.resize(19, 10);
-        expect(factory.build).toHaveBeenCalledWith(
-          WHITEBOARD.createDimensions(20, 20, -10, -10)
-        );
+        expectWidthHeight(-10, -10);
       });
     });
   });

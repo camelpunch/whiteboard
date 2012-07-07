@@ -3,17 +3,14 @@
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
-  WHITEBOARD.createRectangle = function (dimensions, canvas) {
+  WHITEBOARD.createRectangle = function (dimensions) {
     dimensions = dimensions || WHITEBOARD.createDimensions(0, 0, 0, 0);
 
     var namespace = "http://www.w3.org/2000/svg",
       svgShape = document.createElementNS(namespace, 'rect'),
       shape = {
         node: svgShape,
-        dimensions: dimensions,
-        destroy: function () {
-          canvas.remove(shape);
-        }
+        dimensions: dimensions
       };
 
     svgShape.setAttribute('x', dimensions.x);

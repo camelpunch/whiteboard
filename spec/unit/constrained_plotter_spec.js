@@ -15,7 +15,7 @@
     });
 
     describe("resizing", function () {
-      var plotter, factory,
+      var plotter, factory, shape,
         expectWidthHeight = function (width, height) {
           expect(factory.build.callCount).toBe(1);
           expect(factory.build).toHaveBeenCalledWith(
@@ -24,14 +24,22 @@
         };
 
       beforeEach(function () {
-        var shape = jasmine.createSpyObj('shape', ['destroy']);
+        shape = WHITEBOARD.createEllipse();
 
-        factory = jasmine.createSpyObj('factory', ['build']);
+        factory = jasmine.createSpyObj('factory', ['build', 'destroy']);
         plotter = WHITEBOARD.createConstrainedPlotter(factory);
 
         factory.build.andReturn(shape);
         plotter.beginDrawing(20, 20);
         factory.build.reset();
+      });
+
+      it("destroys and rebuilds the shape", function () {
+        factory.build.andCallFake(function () {
+          expect(factory.destroy).toHaveBeenCalledWith(shape);
+        });
+        plotter.resize(21, 5);
+        expect(factory.build).toHaveBeenCalled();
       });
 
       it("uses distance north when north-north-east", function () {

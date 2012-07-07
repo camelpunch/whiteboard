@@ -15,30 +15,32 @@
         expect(factory.build).toHaveBeenCalledWith(expectedDimensions);
       });
 
-      it("changes width / height when resized", function () {
-        var expectedDimensions = WHITEBOARD.createDimensions(2, 6, 8, 14),
-          factory = jasmine.createSpyObj('factory', ['build']),
-          shape = jasmine.createSpyObj('shape', ['destroy']),
-          plotter = WHITEBOARD.createUnconstrainedPlotter(factory);
+      describe("resizing", function () {
+        it("changes width / height", function () {
+          var expectedDimensions = WHITEBOARD.createDimensions(2, 6, 8, 14),
+            factory = jasmine.createSpyObj('factory', ['build', 'destroy']),
+            shape = WHITEBOARD.createEllipse(),
+            plotter = WHITEBOARD.createUnconstrainedPlotter(factory);
 
-        factory.build.andReturn(shape);
-        plotter.beginDrawing(2, 6);
+          factory.build.andReturn(shape);
+          plotter.beginDrawing(2, 6);
 
-        plotter.resize(10, 20);
-        factory.build.andCallFake(function () {
-          expect(shape.destroy).toHaveBeenCalled();
+          plotter.resize(10, 20);
+          factory.build.andCallFake(function () {
+            expect(factory.destroy).toHaveBeenCalledWith(shape);
+          });
+          expect(factory.build).toHaveBeenCalledWith(expectedDimensions);
+
+          factory.build.reset();
+          factory.build.andReturn(shape);
+          factory.destroy.reset();
+
+          plotter.resize(10, 20);
+          factory.build.andCallFake(function () {
+            expect(factory.destroy).toHaveBeenCalledWith(shape);
+          });
+          expect(factory.build).toHaveBeenCalledWith(expectedDimensions);
         });
-        expect(factory.build).toHaveBeenCalledWith(expectedDimensions);
-
-        factory.build.reset();
-        factory.build.andReturn(shape);
-        shape.destroy.reset();
-
-        plotter.resize(10, 20);
-        factory.build.andCallFake(function () {
-          expect(shape.destroy).toHaveBeenCalled();
-        });
-        expect(factory.build).toHaveBeenCalledWith(expectedDimensions);
       });
     });
   });

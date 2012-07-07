@@ -22,5 +22,15 @@
 
       expect(shape).toHaveDimensions(dimensions);
     });
+
+    it("destroys the shape", function () {
+      var canvas = jasmine.createSpyObj('canvas', ['add', 'remove']),
+        dimensions = WHITEBOARD.createDimensions(0, 0, 0, 0),
+        factory = WHITEBOARD.createRectangleFactory(canvas),
+        shape = factory.build(dimensions);
+
+      factory.destroy(shape);
+      expect(canvas.remove).toHaveBeenCalledWith(shape);
+    });
   });
 }());

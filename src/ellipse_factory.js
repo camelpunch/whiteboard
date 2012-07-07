@@ -6,9 +6,12 @@
   WHITEBOARD.createEllipseFactory = function (canvas) {
     return {
       build: function (dimensions) {
-        var shape = WHITEBOARD.createEllipse(dimensions, canvas);
+        var shape = WHITEBOARD.createEllipse(dimensions);
         canvas.add(shape);
         return shape;
+      },
+      destroy: function (shape) {
+        canvas.remove(shape);
       }
     };
   };

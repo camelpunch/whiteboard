@@ -16,7 +16,7 @@
       },
 
       resize: function (right, bottom) {
-        shape.destroy();
+        factory.destroy(shape);
         shape = factory.build(
           WHITEBOARD.createDimensions(x, y, right - x, bottom - y)
         );

@@ -3,7 +3,7 @@
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
-  WHITEBOARD.createEllipse = function (dimensions, canvas) {
+  WHITEBOARD.createEllipse = function (dimensions) {
     dimensions = dimensions || WHITEBOARD.createDimensions(0, 0, 0, 0);
 
     var namespace = "http://www.w3.org/2000/svg",
@@ -15,10 +15,7 @@
       svgShape = document.createElementNS(namespace, 'ellipse'),
       shape = {
         node: svgShape,
-        dimensions: dimensions,
-        destroy: function () {
-          canvas.remove(shape);
-        }
+        dimensions: dimensions
       };
 
     svgShape.setAttribute('cx', centerX);

@@ -34,7 +34,7 @@
             if (!y) {
               y = x;
             }
-            shape.destroy();
+            factory.destroy(shape);
             shape = factory.build(
               WHITEBOARD.createDimensions(originX, originY, x, y)
             );

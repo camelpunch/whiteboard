@@ -2,7 +2,7 @@
 (function () {
   "use strict";
 
-  describe("unit: plotter", function () {
+  describe("unit: plotter collection", function () {
     it("delegates methods through to the current plotter", function () {
       var methods = ['beginDrawing', 'resize'],
         plotter1 = jasmine.createSpyObj('plotter1', methods),

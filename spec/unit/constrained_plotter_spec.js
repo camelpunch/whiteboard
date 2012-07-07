@@ -52,12 +52,12 @@
         expectWidthHeight(15, -15);
       });
 
-      it("uses distance south if south-south-east", function () {
+      it("uses distance south when south-south-east", function () {
         plotter.resize(30, 21);
         expectWidthHeight(10, 10);
       });
 
-      it("uses distance east if east-south-east", function () {
+      it("uses distance east when east-south-east", function () {
         plotter.resize(21, 30);
         expectWidthHeight(10, 10);
       });

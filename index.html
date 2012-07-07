@@ -8,10 +8,11 @@
 <body>
   <h1>Whiteboard</h1>
   <menu id="menu">
-    <button id="square">Make square</button>
-    <button id="rectangle">Make rectangle</button>
-    <button id="ellipse">Make ellipse</button>
-    <button id="circle">Make circle</button>
+    <button id="square" class="shape">Make square</button>
+    <button id="rectangle" class="shape">Make rectangle</button>
+    <button id="ellipse" class="shape">Make ellipse</button>
+    <button id="circle" class="shape">Make circle</button>
+    <button id="clear" class="action">Clear!</button>
   </menu>
   <svg id="canvas" xmlns="http://www.w3.org/2000/svg">
   </svg>
@@ -19,7 +20,9 @@
   <script type="text/javascript" src="src/menu.js"></script>
   <script type="text/javascript" src="src/dimensions.js"></script>
   <script type="text/javascript" src="src/mouse_vector.js"></script>
+  <script type="text/javascript" src="src/rectangle.js"></script>
   <script type="text/javascript" src="src/rectangle_factory.js"></script>
+  <script type="text/javascript" src="src/ellipse.js"></script>
   <script type="text/javascript" src="src/ellipse_factory.js"></script>
   <script type="text/javascript" src="src/canvas.js"></script>
   <script type="text/javascript" src="src/constrained_plotter.js"></script>

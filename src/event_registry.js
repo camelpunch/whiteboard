@@ -17,15 +17,20 @@
       },
 
       fire: function (event, arg1, arg2) {
-        var i, resolvedListener;
+        var i, resolvedListener,
+          callMethod = function (obj) {
+            var receiver = typeof obj.listener === 'function'
+              ? obj.listener()
+              : obj.listener;
+
+            return obj.message
+              ? receiver[obj.message](arg1, arg2)
+              : receiver[arg1](arg2);
+          };
+
         for (i = 0; i < listeners.length; i += 1) {
           if (listeners[i].event === event) {
-            resolvedListener = listeners[i].listener;
-            if (typeof resolvedListener === 'function') {
-              resolvedListener()[listeners[i].message](arg1, arg2);
-            } else {
-              resolvedListener[listeners[i].message](arg1, arg2);
-            }
+            callMethod(listeners[i]);
           }
         }
       }

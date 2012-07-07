@@ -4,8 +4,12 @@
   window.WHITEBOARD = window.WHITEBOARD || {};
 
   WHITEBOARD.createMenu = function (menuEl, events) {
-    jQuery(menuEl).find('button').click(function (event) {
-      events.fire('select', event.currentTarget.id);
+    jQuery(menuEl).on('click', '.shape', function (event) {
+      events.fire('selectShape', event.currentTarget.id);
+    });
+
+    jQuery(menuEl).on('click', '.action', function (event) {
+      events.fire('selectAction', event.currentTarget.id);
     });
 
     return { tells: events.tells };

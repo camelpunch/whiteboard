@@ -23,40 +23,47 @@
       var menuEl, menu;
 
       beforeEach(function () {
-        menuEl = jQuery('<div>' +
-                        '<button id="square"/>' +
-                        '<button id="rectangle"/>' +
-                        '<button id="circle"/>' +
-                        '<button id="ellipse"/>' +
-                        '</div>');
+        menuEl = jQuery('<div>');
         menu = WHITEBOARD.createMenu(menuEl[0], registry);
+        menuEl.append('<button id="square" class="shape"/>',
+                      '<button id="rectangle" class="shape"/>',
+                      '<button id="circle" class="shape"/>',
+                      '<button id="ellipse" class="shape"/>',
+                      '<button id="clear" class="action"/>');
       });
 
       describe("square", function () {
-        it("fires a select event on click", function () {
+        it("fires a selectShape event on click", function () {
           jQuery('#square', menuEl).click();
-          expect(registry.fire).toHaveBeenCalledWith('select', 'square');
+          expect(registry.fire).toHaveBeenCalledWith('selectShape', 'square');
         });
       });
 
       describe("rectangle", function () {
-        it("fires a select event on click", function () {
+        it("fires a selectShape event on click", function () {
           jQuery('#rectangle', menuEl).click();
-          expect(registry.fire).toHaveBeenCalledWith('select', 'rectangle');
+          expect(registry.fire).toHaveBeenCalledWith('selectShape', 'rectangle');
         });
       });
 
       describe("circle", function () {
-        it("fires a select event on click", function () {
+        it("fires a selectShape event on click", function () {
           jQuery('#circle', menuEl).click();
-          expect(registry.fire).toHaveBeenCalledWith('select', 'circle');
+          expect(registry.fire).toHaveBeenCalledWith('selectShape', 'circle');
         });
       });
 
       describe("ellipse", function () {
-        it("fires a select event on click", function () {
+        it("fires a selectShape event on click", function () {
           jQuery('#ellipse', menuEl).click();
-          expect(registry.fire).toHaveBeenCalledWith('select', 'ellipse');
+          expect(registry.fire).toHaveBeenCalledWith('selectShape', 'ellipse');
+        });
+      });
+
+      describe("clear", function () {
+        it("fires a selectAction event on click", function () {
+          jQuery('#clear', menuEl).click();
+          expect(registry.fire).toHaveBeenCalledWith('selectAction', 'clear');
         });
       });
     });

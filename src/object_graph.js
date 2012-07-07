@@ -10,23 +10,24 @@
       mouseVector = WHITEBOARD.createMouseVector(canvasEl, events()),
       plotters = WHITEBOARD.createPlotterCollection({
         square: WHITEBOARD.createConstrainedPlotter(
-          WHITEBOARD.createRectangleFactory(canvasEl)
+          WHITEBOARD.createRectangleFactory(canvas)
         ),
         rectangle: WHITEBOARD.createUnconstrainedPlotter(
-          WHITEBOARD.createRectangleFactory(canvasEl)
+          WHITEBOARD.createRectangleFactory(canvas)
         ),
         circle: WHITEBOARD.createConstrainedPlotter(
-          WHITEBOARD.createEllipseFactory(canvasEl)
+          WHITEBOARD.createEllipseFactory(canvas)
         ),
         ellipse: WHITEBOARD.createUnconstrainedPlotter(
-          WHITEBOARD.createEllipseFactory(canvasEl)
+          WHITEBOARD.createEllipseFactory(canvas)
         )
       });
 
     menu
-      .tells(plotters, { to: 'switch', on: 'select' })
-      .tells(mouseVector, { to: 'waitForInput', on: 'select' })
-      .tells(canvas, { to: 'enterDrawState', on: 'select' });
+      .tells(plotters, { to: 'switch', on: 'selectShape' })
+      .tells(mouseVector, { to: 'waitForInput', on: 'selectShape' })
+      .tells(canvas, { to: 'enterDrawState', on: 'selectShape' })
+      .tells(canvas, { on: 'selectAction' });
 
     mouseVector
       .tells(plotters.current, { to: 'beginDrawing', on: 'start' })

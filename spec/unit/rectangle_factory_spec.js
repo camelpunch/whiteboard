@@ -5,34 +5,22 @@
   describe("unit: rectangle factory", function () {
     var namespace = "http://www.w3.org/2000/svg";
 
-    it("appends to the passed container", function () {
-      var container = document.createElementNS(namespace, 'svg'),
+    it("adds the shape to the passed canvas", function () {
+      var canvas = jasmine.createSpyObj('canvas', ['add']),
         dimensions = WHITEBOARD.createDimensions(0, 0, 0, 0),
-        factory = WHITEBOARD.createRectangleFactory(container);
+        factory = WHITEBOARD.createRectangleFactory(canvas),
+        shape = factory.build(dimensions);
 
-      factory.build(dimensions);
-      expect(jQuery('rect', container)).toExist();
+      expect(canvas.add).toHaveBeenCalledWith(shape);
     });
 
-    describe("returned shape", function () {
-      it("has dimensions that were passed", function () {
-        var container = document.createElementNS(namespace, 'svg'),
-          dimensions = WHITEBOARD.createDimensions(1, 2, 3, 4),
-          factory = WHITEBOARD.createRectangleFactory(container);
+    it("returns the shape", function () {
+      var canvas = jasmine.createSpyObj('canvas', ['add']),
+        dimensions = WHITEBOARD.createDimensions(1, 2, 3, 4),
+        factory = WHITEBOARD.createRectangleFactory(canvas),
+        shape = factory.build(dimensions);
 
-        factory.build(dimensions);
-        expect(jQuery('rect', container)).toHaveDimensions(dimensions);
-      });
-
-      it("can be destroyed", function () {
-        var container = document.createElementNS(namespace, 'svg'),
-          dimensions = WHITEBOARD.createDimensions(0, 0, 0, 0),
-          factory = WHITEBOARD.createRectangleFactory(container),
-          rectangle = factory.build(dimensions);
-
-        rectangle.destroy();
-        expect(jQuery('rect', container)).not.toExist();
-      });
+      expect(shape).toHaveDimensions(dimensions);
     });
   });
 }());

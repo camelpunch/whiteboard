@@ -10,14 +10,28 @@
       shapeHandler;
 
     beforeEach(function () {
-      svgShape = document.createElementNS(namespace, 'rect');
       canvasEl = document.createElementNS(namespace, 'svg');
       registry = jasmine.createSpyObj('event registry', ['fire']);
       shapeHandler = WHITEBOARD.createShapeHandler(canvasEl, registry);
-      canvasEl.appendChild(svgShape);
     });
 
-    it("fires shapeMoveBegin when mousedown on a DOM shape received", function () {
+    it("fires shapeMoveBegin when mousedown on an ellipse occurs", function () {
+      svgShape = document.createElementNS(namespace, 'ellipse');
+      canvasEl.appendChild(svgShape);
+
+      expect(registry.fire).not.toHaveBeenCalled();
+      registry.fire.andCallFake(function (eventName, shape) {
+        expect(eventName).toBe('shapeMoveBegin');
+        expect(shape.node).toBe(svgShape);
+      });
+      jQuery(svgShape).mousedown();
+      expect(registry.fire.callCount).toBe(1);
+    });
+
+    it("fires shapeMoveBegin when mousedown on a rect occurs", function () {
+      svgShape = document.createElementNS(namespace, 'rect');
+      canvasEl.appendChild(svgShape);
+
       expect(registry.fire).not.toHaveBeenCalled();
       registry.fire.andCallFake(function (eventName, shape) {
         expect(eventName).toBe('shapeMoveBegin');

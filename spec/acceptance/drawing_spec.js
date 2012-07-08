@@ -136,7 +136,7 @@
     });
 
     describe("moving", function () {
-      it("allows movement of drawn shapes", function () {
+      it("allows movement of rects", function () {
         var shape;
 
         chooseShape('square');
@@ -153,6 +153,27 @@
           offsetY: 60
         }));
         expect(shape).toHaveDimensions(
+          WHITEBOARD.createDimensions(50, 60, 15, 15)
+        );
+      });
+
+      it("allows movement of ellipses", function () {
+        var shape;
+
+        chooseShape('circle');
+        draw([20, 30], [9, 16], [30, 45]);
+        shape = canvasEl.find('ellipse');
+
+        shape.mousedown();
+        canvasEl.trigger(jQuery.Event('mousemove', {
+          offsetX: 35,
+          offsetY: 50
+        }));
+        canvasEl.trigger(jQuery.Event('mouseup', {
+          offsetX: 50,
+          offsetY: 60
+        }));
+        expect(shape).toHaveEllipseDimensions(
           WHITEBOARD.createDimensions(50, 60, 15, 15)
         );
       });

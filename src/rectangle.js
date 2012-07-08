@@ -6,29 +6,21 @@
   WHITEBOARD.createRectangle = function (arg) {
     var dimensions,
       svgShape,
-      namespace = "http://www.w3.org/2000/svg";
+      namespace = "http://www.w3.org/2000/svg",
+      shapeFromDimensions = function (dimensions) {
+        var svgShape = document.createElementNS(namespace, 'rect');
+        svgShape.setAttribute('x', dimensions.x);
+        svgShape.setAttribute('y', dimensions.y);
+        svgShape.setAttribute('width', dimensions.width);
+        svgShape.setAttribute('height', dimensions.height);
+        return svgShape;
+      };
 
-    if (arg && arg.hasOwnProperty('equals')) {
-      dimensions = arg;
-    } else if (arg) {
-      svgShape = arg;
-      dimensions = WHITEBOARD.createDimensions(
-        svgShape.x.baseVal.value,
-        svgShape.y.baseVal.value,
-        svgShape.width.baseVal.value,
-        svgShape.height.baseVal.value
+    svgShape = arg && arg.hasOwnProperty('equals')
+      ? shapeFromDimensions(arg)
+      : arg || shapeFromDimensions(
+        WHITEBOARD.createDimensions(0, 0, 0, 0)
       );
-    } else {
-      dimensions = WHITEBOARD.createDimensions(0, 0, 0, 0);
-    }
-
-    if (!svgShape) {
-      svgShape = document.createElementNS(namespace, 'rect');
-      svgShape.setAttribute('x', dimensions.x);
-      svgShape.setAttribute('y', dimensions.y);
-      svgShape.setAttribute('width', dimensions.width);
-      svgShape.setAttribute('height', dimensions.height);
-    }
 
     return Object.create({}, {
       node: {

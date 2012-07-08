@@ -9,6 +9,11 @@
                   WHITEBOARD.createRectangle(event.currentTarget));
     });
 
+    jQuery(canvasEl).on('mousedown', 'ellipse', function (event) {
+      events.fire('shapeMoveBegin',
+                  WHITEBOARD.createEllipse(event.currentTarget));
+    });
+
     return { tells: events.tells };
   };
 }());

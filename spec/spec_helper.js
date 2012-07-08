@@ -4,63 +4,31 @@
   beforeEach(function () {
     this.addMatchers({
       toHaveEllipseDimensions: function (expected) {
-        var success, actualX, actualY, actualWidth, actualHeight, shape,
-          get = function (key) { return parseFloat(shape.attr(key)); },
-          centerX, centerY, radiusX, radiusY;
+        var actual = this.actual,
+          get = function (key) { return parseFloat(jQuery(actual).attr(key)); };
 
-        if (this.actual.dimensions) {
-          success = this.actual.dimensions.equals(expected);
-        } else {
-          shape = jQuery(this.actual);
-          centerX = get('cx');
-          centerY = get('cy');
-          radiusX = get('rx');
-          radiusY = get('ry');
-
-          actualX = centerX - radiusX;
-          actualY = centerY - radiusY;
-          actualWidth = radiusX * 2;
-          actualHeight = radiusY * 2;
-
-          success =
-            actualX === expected.x &&
-            actualY === expected.y &&
-            actualWidth === expected.width &&
-            actualHeight === expected.height;
-
-          if (!success) {
-            console.log("expected: '" + expected + "'\nbut got: x: " + actualX +
-                        ", y: " + actualY + ", " + actualWidth + 'x' +
-                        actualHeight);
-          }
-        }
-
-        return success;
+        this.actual = this.actual.dimensions ||
+          WHITEBOARD.createDimensions(
+            get('cx') - get('rx'),
+            get('cy') - get('ry'),
+            get('rx') * 2,
+            get('ry') * 2
+          );
+        return this.actual.equals(expected);
       },
 
       toHaveDimensions: function (expected) {
-        var success, actualX, actualY, actualWidth, actualHeight, shape,
-          actualDimensions,
-          get = function (key) { return parseFloat(shape.attr(key)); };
+        var actual = this.actual,
+          get = function (key) { return parseFloat(jQuery(actual).attr(key)); };
 
-        if (this.actual.dimensions) {
-          actualDimensions = this.actual.dimensions;
-        } else {
-          shape = jQuery(this.actual);
-          actualDimensions = WHITEBOARD.createDimensions(
+        this.actual = this.actual.dimensions ||
+          WHITEBOARD.createDimensions(
             get('x'),
             get('y'),
             get('width'),
             get('height')
           );
-        }
-
-        success = actualDimensions.equals(expected);
-        if (!success) {
-          console.log("expected", expected, "\nbut got", actualDimensions);
-        }
-
-        return success;
+        return this.actual.equals(expected);
       }
     });
   });

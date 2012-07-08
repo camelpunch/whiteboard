@@ -1,3 +1,4 @@
+/*global WHITEBOARD */
 (function () {
   "use strict";
   beforeEach(function () {
@@ -39,28 +40,24 @@
 
       toHaveDimensions: function (expected) {
         var success, actualX, actualY, actualWidth, actualHeight, shape,
+          actualDimensions,
           get = function (key) { return parseFloat(shape.attr(key)); };
 
         if (this.actual.dimensions) {
-          success = this.actual.dimensions.equals(expected);
+          actualDimensions = this.actual.dimensions;
         } else {
           shape = jQuery(this.actual);
-          actualX = get('x');
-          actualY = get('y');
-          actualWidth = get('width');
-          actualHeight = get('height');
+          actualDimensions = WHITEBOARD.createDimensions(
+            get('x'),
+            get('y'),
+            get('width'),
+            get('height')
+          );
+        }
 
-          success =
-            actualX === expected.x &&
-            actualY === expected.y &&
-            actualWidth === expected.width &&
-            actualHeight === expected.height;
-
-          if (!success) {
-            console.log("expected: '" + expected + "'\nbut got: x: " + actualX +
-                        ", y: " + actualY + ", " + actualWidth + 'x' +
-                        actualHeight);
-          }
+        success = actualDimensions.equals(expected);
+        if (!success) {
+          console.log("expected", expected, "\nbut got", actualDimensions);
         }
 
         return success;

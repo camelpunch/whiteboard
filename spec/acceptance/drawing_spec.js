@@ -21,7 +21,7 @@
         jQuery(menuEl).find('#' + slug).click();
       },
 
-      drag = function (start, middle, end) {
+      draw = function (start, middle, end) {
         canvasEl.trigger(jQuery.Event('mousedown', {
           offsetX: start[0],
           offsetY: start[1]
@@ -49,7 +49,7 @@
 
           beforeEach(function () {
             chooseShape('square');
-            drag([2, 8], [9, 16], [14, 28]);
+            draw([2, 8], [9, 16], [14, 28]);
           });
 
           it("exists", function () {
@@ -69,7 +69,7 @@
 
           beforeEach(function () {
             chooseShape('rectangle');
-            drag([2, 8], [9, 16], [14, 28]);
+            draw([2, 8], [9, 16], [14, 28]);
           });
 
           it("exists", function () {
@@ -89,7 +89,7 @@
 
           beforeEach(function () {
             chooseShape('circle');
-            drag([20, 30], [9, 16], [30, 45]);
+            draw([20, 30], [9, 16], [30, 45]);
           });
 
           it("exists", function () {
@@ -109,7 +109,7 @@
 
           beforeEach(function () {
             chooseShape('ellipse');
-            drag([20, 30], [9, 16], [30, 45]);
+            draw([20, 30], [9, 16], [30, 45]);
           });
 
           it("exists", function () {
@@ -127,11 +127,34 @@
     describe("clearing", function () {
       it("removes all elements from the canvas", function () {
         chooseShape('ellipse');
-        drag([20, 30], [9, 16], [30, 45]);
+        draw([20, 30], [9, 16], [30, 45]);
         chooseShape('square');
-        drag([20, 30], [9, 16], [30, 45]);
+        draw([20, 30], [9, 16], [30, 45]);
         chooseAction('clear');
         expect(canvasEl).toBeEmpty();
+      });
+    });
+
+    describe("moving", function () {
+      it("allows movement of drawn shapes", function () {
+        var shape;
+
+        chooseShape('square');
+        draw([20, 30], [9, 16], [30, 45]);
+        shape = canvasEl.find('rect');
+
+        shape.mousedown();
+        canvasEl.trigger(jQuery.Event('mousemove', {
+          offsetX: 35,
+          offsetY: 50
+        }));
+        canvasEl.trigger(jQuery.Event('mouseup', {
+          offsetX: 50,
+          offsetY: 60
+        }));
+        expect(shape).toHaveDimensions(
+          WHITEBOARD.createDimensions(50, 60, 15, 15)
+        );
       });
     });
   });

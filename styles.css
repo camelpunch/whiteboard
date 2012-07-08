@@ -4,3 +4,13 @@
 #canvas.drawing {
   cursor: crosshair
 }
+#canvas * {
+  fill: blue;
+  fill-opacity: 0.5;
+}
+#canvas *:hover {
+  cursor: move;
+  stroke: black;
+  stroke-width: 6px;
+  stroke-opacity: 0.5;
+}

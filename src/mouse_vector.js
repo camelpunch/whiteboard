@@ -6,7 +6,23 @@
   WHITEBOARD.createMouseVector = function (el, events) {
     var self = {
       tells: events.tells,
-      waitForInput: function () {
+      waitForMove: function () {
+        var state = 'started';
+
+        jQuery(el)
+          .mousemove(function (e) {
+            if (state === 'started') {
+              events.fire('tick', e.offsetX, e.offsetY);
+            }
+          })
+          .mouseup(function (e) {
+            if (state === 'started') {
+              events.fire('complete', e.offsetX, e.offsetY);
+              state = 'complete';
+            }
+          });
+      },
+      waitForDrag: function () {
         var state = null;
 
         jQuery(el)

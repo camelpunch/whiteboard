@@ -73,13 +73,13 @@
       });
 
       it("uses distance west when west-north-west", function () {
-        plotter.resize(5, 10);
-        expectWidthHeight(-15, -15);
+        plotter.resize(4, 10);
+        expectWidthHeight(-16, -16);
       });
 
       it("uses distance north when north-north-west", function () {
-        plotter.resize(19, 10);
-        expectWidthHeight(-10, -10);
+        plotter.resize(19, 9);
+        expectWidthHeight(-11, -11);
       });
     });
   });

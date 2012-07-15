@@ -4,21 +4,19 @@
   window.WHITEBOARD = window.WHITEBOARD || {};
 
   WHITEBOARD.createUnconstrainedPlotter = function (factory) {
-    var x, y, shape;
+    var originX, originY, shape;
 
     return {
-      beginDrawing: function (startX, startY) {
-        x = startX;
-        y = startY;
-        shape = factory.build(
-          WHITEBOARD.createDimensions(startX, startY, 0, 0)
-        );
+      beginDrawing: function (x, y) {
+        originX = x;
+        originY = y;
+        shape = factory.build(WHITEBOARD.createDimensions(x, y, 0, 0));
       },
 
       resize: function (right, bottom) {
         factory.destroy(shape);
         shape = factory.build(
-          WHITEBOARD.createDimensions(x, y, right - x, bottom - y)
+          WHITEBOARD.createDimensions(originX, originY, right - originX, bottom - originY)
         );
       }
     };

@@ -31,12 +31,12 @@
                      { to: 'sleep', on: 'squareCreated' });
 
       listenerFunction.andReturn(listenerObject);
-      registry.fire('squareCreated', 'myarg1', 'myarg2');
+      registry.fire('squareCreated', 'myarg1', 'myarg2', 'myarg3');
 
-      expect(listenerObject.sleep).toHaveBeenCalledWith('myarg1', 'myarg2');
+      expect(listenerObject.sleep).toHaveBeenCalledWith('myarg1', 'myarg2', 'myarg3');
     });
 
-    it("can notify with a dynamically created method name and single argument", function () {
+    it("can notify with a dynamically created method name and two arguments", function () {
       var listenerFunction = jasmine.createSpy('listener function'),
         listenerObject = jasmine.createSpyObj('listener object', ['sleep']),
         registry = WHITEBOARD.createEventRegistry();
@@ -44,9 +44,9 @@
       registry.tells(listenerFunction, { on: 'squareCreated' });
 
       listenerFunction.andReturn(listenerObject);
-      registry.fire('squareCreated', 'sleep', 'myarg1');
+      registry.fire('squareCreated', 'sleep', 'myarg1', 'myarg2');
 
-      expect(listenerObject.sleep).toHaveBeenCalledWith('myarg1');
+      expect(listenerObject.sleep).toHaveBeenCalledWith('myarg1', 'myarg2');
     });
   });
 }());

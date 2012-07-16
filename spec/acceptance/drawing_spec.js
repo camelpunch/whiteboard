@@ -137,44 +137,52 @@
 
     describe("moving", function () {
       it("allows movement of rects", function () {
-        var shape;
+        var shape,
+          mousedown = jQuery.Event('mousedown', {
+            offsetX: 35,
+            offsetY: 50
+          });
 
         chooseShape('square');
         draw([20, 30], [9, 16], [30, 45]);
         shape = canvasEl.find('rect');
 
-        shape.mousedown();
+        shape.trigger(mousedown);
         canvasEl.trigger(jQuery.Event('mousemove', {
-          offsetX: 35,
-          offsetY: 50
+          offsetX: 40,
+          offsetY: 55
         }));
         canvasEl.trigger(jQuery.Event('mouseup', {
           offsetX: 50,
           offsetY: 60
         }));
         expect(shape).toHaveDimensions(
-          WHITEBOARD.createDimensions(50, 60, 15, 15)
+          WHITEBOARD.createDimensions(35, 40, 15, 15)
         );
       });
 
       it("allows movement of ellipses", function () {
-        var shape;
+        var shape,
+          mousedown = jQuery.Event('mousedown', {
+            offsetX: 35,
+            offsetY: 50
+          });
 
         chooseShape('circle');
         draw([20, 30], [9, 16], [30, 45]);
         shape = canvasEl.find('ellipse');
 
-        shape.mousedown();
+        shape.trigger(mousedown);
         canvasEl.trigger(jQuery.Event('mousemove', {
-          offsetX: 35,
-          offsetY: 50
+          offsetX: 40,
+          offsetY: 55
         }));
         canvasEl.trigger(jQuery.Event('mouseup', {
           offsetX: 50,
           offsetY: 60
         }));
         expect(shape).toHaveEllipseDimensions(
-          WHITEBOARD.createDimensions(50, 60, 15, 15)
+          WHITEBOARD.createDimensions(35, 40, 15, 15)
         );
       });
     });

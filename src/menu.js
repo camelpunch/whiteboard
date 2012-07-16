@@ -5,7 +5,7 @@
 
   WHITEBOARD.createMenu = function (menuEl, events) {
     jQuery(menuEl).on('click', '.shape', function (event) {
-      events.fire('selectShape', event.currentTarget.id);
+      events.fire('selectShapeType', event.currentTarget.id);
     });
 
     jQuery(menuEl).on('click', '.action', function (event) {

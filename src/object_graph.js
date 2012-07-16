@@ -27,9 +27,9 @@
       });
 
     menu
-      .tells(plotters, { to: 'switch', on: 'selectShape' })
-      .tells(drawVector, { to: 'waitForDrag', on: 'selectShape' })
-      .tells(canvas, { to: 'enterDrawState', on: 'selectShape' })
+      .tells(plotters, { to: 'switch', on: 'selectShapeType' })
+      .tells(drawVector, { to: 'waitForDrag', on: 'selectShapeType' })
+      .tells(canvas, { to: 'enterDrawState', on: 'selectShapeType' })
       .tells(canvas, { on: 'selectAction' });
 
     drawVector
@@ -40,7 +40,7 @@
 
     shapeHandler
       .tells(moveVector, { to: 'waitForMove', on: 'shapeMoveBegin' })
-      .tells(shapePositioner, { to: 'setShape', on: 'shapeMoveBegin' });
+      .tells(shapePositioner, { to: 'setShapeAndStartCoords', on: 'shapeMoveBegin' });
 
     moveVector
       .tells(shapePositioner, { to: 'reposition', on: 'tick' })

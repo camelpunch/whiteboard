@@ -6,12 +6,16 @@
   WHITEBOARD.createShapeHandler = function (canvasEl, events) {
     jQuery(canvasEl).on('mousedown', 'rect', function (event) {
       events.fire('shapeMoveBegin',
-                  WHITEBOARD.createRectangle(event.currentTarget));
+                  WHITEBOARD.createRectangle(event.currentTarget),
+                  event.offsetX,
+                  event.offsetY);
     });
 
     jQuery(canvasEl).on('mousedown', 'ellipse', function (event) {
       events.fire('shapeMoveBegin',
-                  WHITEBOARD.createEllipse(event.currentTarget));
+                  WHITEBOARD.createEllipse(event.currentTarget),
+                  event.offsetX,
+                  event.offsetY);
     });
 
     return { tells: events.tells };

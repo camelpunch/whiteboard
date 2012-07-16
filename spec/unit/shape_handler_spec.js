@@ -16,28 +16,36 @@
     });
 
     it("fires shapeMoveBegin when mousedown on an ellipse occurs", function () {
+      var mousedown = jQuery.Event('mousedown', { offsetX: 10, offsetY: 20 });
+
       svgShape = document.createElementNS(namespace, 'ellipse');
       canvasEl.appendChild(svgShape);
 
       expect(registry.fire).not.toHaveBeenCalled();
-      registry.fire.andCallFake(function (eventName, shape) {
+      registry.fire.andCallFake(function (eventName, shape, mouseX, mouseY) {
         expect(eventName).toBe('shapeMoveBegin');
         expect(shape.node).toBe(svgShape);
+        expect(mouseX).toBe(10);
+        expect(mouseY).toBe(20);
       });
-      jQuery(svgShape).mousedown();
+      jQuery(svgShape).trigger(mousedown);
       expect(registry.fire.callCount).toBe(1);
     });
 
     it("fires shapeMoveBegin when mousedown on a rect occurs", function () {
+      var mousedown = jQuery.Event('mousedown', { offsetX: 14, offsetY: 16 });
+
       svgShape = document.createElementNS(namespace, 'rect');
       canvasEl.appendChild(svgShape);
 
       expect(registry.fire).not.toHaveBeenCalled();
-      registry.fire.andCallFake(function (eventName, shape) {
+      registry.fire.andCallFake(function (eventName, shape, mouseX, mouseY) {
         expect(eventName).toBe('shapeMoveBegin');
         expect(shape.node).toBe(svgShape);
+        expect(mouseX).toBe(14);
+        expect(mouseY).toBe(16);
       });
-      jQuery(svgShape).mousedown();
+      jQuery(svgShape).trigger(mousedown);
       expect(registry.fire.callCount).toBe(1);
     });
 

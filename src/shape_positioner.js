@@ -4,15 +4,25 @@
   window.WHITEBOARD = window.WHITEBOARD || {};
 
   WHITEBOARD.createShapePositioner = function () {
-    var shape;
+    var shape, shapeOriginCoords, startCoords;
 
     return {
-      setShape: function (newShape) {
+      setShapeAndStartCoords: function (newShape, x, y) {
         shape = newShape;
+        shapeOriginCoords = [shape.dimensions.x, shape.dimensions.y];
+        startCoords = [x, y];
         return this;
       },
-      reposition: function (x, y) {
-        shape.reposition(x, y);
+
+      reposition: function (endX, endY) {
+        var distanceX = endX - startCoords[0],
+          distanceY = endY - startCoords[1];
+
+        shape.reposition(
+          shapeOriginCoords[0] + distanceX,
+          shapeOriginCoords[1] + distanceY
+        );
+        return this;
       }
     };
   };

@@ -15,7 +15,7 @@
       shapeHandler = WHITEBOARD.createShapeHandler(canvasEl, registry);
     });
 
-    it("fires shapeMoveBegin when mousedown on an ellipse occurs", function () {
+    it("fires selectShapeToken when mousedown on an ellipse occurs", function () {
       var mousedown = jQuery.Event('mousedown', { offsetX: 10, offsetY: 20 });
 
       svgShape = document.createElementNS(namespace, 'ellipse');
@@ -23,7 +23,7 @@
 
       expect(registry.fire).not.toHaveBeenCalled();
       registry.fire.andCallFake(function (eventName, shape, mouseX, mouseY) {
-        expect(eventName).toBe('shapeMoveBegin');
+        expect(eventName).toBe('selectShapeToken');
         expect(shape.node).toBe(svgShape);
         expect(mouseX).toBe(10);
         expect(mouseY).toBe(20);
@@ -32,7 +32,7 @@
       expect(registry.fire.callCount).toBe(1);
     });
 
-    it("fires shapeMoveBegin when mousedown on a rect occurs", function () {
+    it("fires selectShapeToken when mousedown on a rect occurs", function () {
       var mousedown = jQuery.Event('mousedown', { offsetX: 14, offsetY: 16 });
 
       svgShape = document.createElementNS(namespace, 'rect');
@@ -40,7 +40,7 @@
 
       expect(registry.fire).not.toHaveBeenCalled();
       registry.fire.andCallFake(function (eventName, shape, mouseX, mouseY) {
-        expect(eventName).toBe('shapeMoveBegin');
+        expect(eventName).toBe('selectShapeToken');
         expect(shape.node).toBe(svgShape);
         expect(mouseX).toBe(14);
         expect(mouseY).toBe(16);

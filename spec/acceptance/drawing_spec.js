@@ -52,7 +52,7 @@
             draw([2, 8], [9, 16], [14, 28]);
           });
 
-          it("exists", function () {
+          it("creates an element", function () {
             expect(canvasEl.find('rect')).toExist();
           });
 
@@ -72,7 +72,7 @@
             draw([2, 8], [9, 16], [14, 28]);
           });
 
-          it("exists", function () {
+          it("creates an element", function () {
             expect(canvasEl.find('rect')).toExist();
           });
 
@@ -92,7 +92,7 @@
             draw([20, 30], [9, 16], [30, 45]);
           });
 
-          it("exists", function () {
+          it("creates an element", function () {
             expect(canvasEl.find('ellipse')).toExist();
           });
 
@@ -112,7 +112,7 @@
             draw([20, 30], [9, 16], [30, 45]);
           });
 
-          it("exists", function () {
+          it("creates an element", function () {
             expect(canvasEl.find('ellipse')).toExist();
           });
 
@@ -136,51 +136,37 @@
     });
 
     describe("moving", function () {
+      var shape,
+        move = function (shapeName, svgShapeName) {
+          var mousedown = jQuery.Event('mousedown', {
+              offsetX: 35,
+              offsetY: 50
+            });
+
+          chooseShape(shapeName);
+          draw([20, 30], [9, 16], [30, 45]);
+          shape = canvasEl.find(svgShapeName);
+
+          shape.trigger(mousedown);
+          canvasEl.trigger(jQuery.Event('mousemove', {
+            offsetX: 40,
+            offsetY: 55
+          }));
+          canvasEl.trigger(jQuery.Event('mouseup', {
+            offsetX: 50,
+            offsetY: 60
+          }));
+        };
+
       it("allows movement of rects", function () {
-        var shape,
-          mousedown = jQuery.Event('mousedown', {
-            offsetX: 35,
-            offsetY: 50
-          });
-
-        chooseShape('square');
-        draw([20, 30], [9, 16], [30, 45]);
-        shape = canvasEl.find('rect');
-
-        shape.trigger(mousedown);
-        canvasEl.trigger(jQuery.Event('mousemove', {
-          offsetX: 40,
-          offsetY: 55
-        }));
-        canvasEl.trigger(jQuery.Event('mouseup', {
-          offsetX: 50,
-          offsetY: 60
-        }));
+        move('square', 'rect');
         expect(shape).toHaveDimensions(
           WHITEBOARD.createDimensions(35, 40, 15, 15)
         );
       });
 
       it("allows movement of ellipses", function () {
-        var shape,
-          mousedown = jQuery.Event('mousedown', {
-            offsetX: 35,
-            offsetY: 50
-          });
-
-        chooseShape('circle');
-        draw([20, 30], [9, 16], [30, 45]);
-        shape = canvasEl.find('ellipse');
-
-        shape.trigger(mousedown);
-        canvasEl.trigger(jQuery.Event('mousemove', {
-          offsetX: 40,
-          offsetY: 55
-        }));
-        canvasEl.trigger(jQuery.Event('mouseup', {
-          offsetX: 50,
-          offsetY: 60
-        }));
+        move('circle', 'ellipse');
         expect(shape).toHaveEllipseDimensions(
           WHITEBOARD.createDimensions(35, 40, 15, 15)
         );

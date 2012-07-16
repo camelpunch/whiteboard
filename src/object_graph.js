@@ -39,8 +39,8 @@
       .tells(canvas, { to: 'exitDrawState', on: 'complete' });
 
     shapeHandler
-      .tells(moveVector, { to: 'waitForMove', on: 'shapeMoveBegin' })
-      .tells(shapePositioner, { to: 'setShapeAndStartCoords', on: 'shapeMoveBegin' });
+      .tells(moveVector, { to: 'waitForMove', on: 'selectShapeToken' })
+      .tells(shapePositioner, { to: 'setShapeAndStartCoords', on: 'selectShapeToken' });
 
     moveVector
       .tells(shapePositioner, { to: 'reposition', on: 'tick' })

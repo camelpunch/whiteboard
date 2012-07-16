@@ -4,11 +4,8 @@
   window.WHITEBOARD = window.WHITEBOARD || {};
 
   WHITEBOARD.createMouseVector = function (el, events) {
-    var self = {
-      tells: events.tells,
-      waitForMove: function () {
-        var state = 'started';
-
+    var state,
+      moveable = function (el) {
         jQuery(el)
           .mousemove(function (e) {
             if (state === 'started') {
@@ -21,30 +18,25 @@
               state = 'complete';
             }
           });
+      };
+
+    return {
+      tells: events.tells,
+      waitForMove: function () {
+        state = 'started';
+        moveable(el);
       },
       waitForDrag: function () {
-        var state = null;
-
+        state = null;
+        moveable(el);
         jQuery(el)
           .mousedown(function (e) {
             if (state !== 'complete') {
               state = 'started';
               events.fire('start', e.offsetX, e.offsetY);
             }
-          })
-          .mousemove(function (e) {
-            if (state === 'started') {
-              events.fire('tick', e.offsetX, e.offsetY);
-            }
-          })
-          .mouseup(function (e) {
-            if (state === 'started') {
-              events.fire('complete', e.offsetX, e.offsetY);
-              state = 'complete';
-            }
           });
       }
     };
-    return self;
   };
 }());

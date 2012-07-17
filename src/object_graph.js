@@ -9,20 +9,29 @@
       menu = WHITEBOARD.createMenu(menuEl, events()),
       drawVector = WHITEBOARD.createMouseVector(canvasEl, events()),
       moveVector = WHITEBOARD.createMouseVector(canvasEl, events()),
-      shapeHandler = WHITEBOARD.createShapeHandler(canvasEl, events()),
+      shapes = WHITEBOARD.createShapeCollection(),
+      shapeHandler = WHITEBOARD.createShapeHandler(canvasEl, shapes, events()),
       shapePositioner = WHITEBOARD.createShapePositioner(),
       plotters = WHITEBOARD.createPlotterCollection({
         square: WHITEBOARD.createConstrainedPlotter(
-          WHITEBOARD.createRectangleFactory(canvas)
+          WHITEBOARD.createShapeFactory(
+            canvasEl, shapes, WHITEBOARD.createRectangle
+          )
         ),
         rectangle: WHITEBOARD.createUnconstrainedPlotter(
-          WHITEBOARD.createRectangleFactory(canvas)
+          WHITEBOARD.createShapeFactory(
+            canvasEl, shapes, WHITEBOARD.createRectangle
+          )
         ),
         circle: WHITEBOARD.createConstrainedPlotter(
-          WHITEBOARD.createEllipseFactory(canvas)
+          WHITEBOARD.createShapeFactory(
+            canvasEl, shapes, WHITEBOARD.createEllipse
+          )
         ),
         ellipse: WHITEBOARD.createUnconstrainedPlotter(
-          WHITEBOARD.createEllipseFactory(canvas)
+          WHITEBOARD.createShapeFactory(
+            canvasEl, shapes, WHITEBOARD.createEllipse
+          )
         )
       });
 

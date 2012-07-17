@@ -3,7 +3,7 @@
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
-  WHITEBOARD.createRectangle = function (arg) {
+  WHITEBOARD.createRectangle = function (canvasEl, arg) {
     var dimensions,
       svgShape,
       namespace = "http://www.w3.org/2000/svg",
@@ -23,9 +23,15 @@
       );
 
     return Object.create({}, {
-      node: {
-        value: svgShape,
-        enumerable: true
+      render: {
+        value: function () {
+          canvasEl.appendChild(svgShape);
+        }
+      },
+      remove: {
+        value: function () {
+          canvasEl.removeChild(svgShape);
+        }
       },
       dimensions: {
         get: function () {
@@ -42,6 +48,11 @@
         value: function (x, y) {
           svgShape.setAttribute('x', x);
           svgShape.setAttribute('y', y);
+        }
+      },
+      toString: {
+        value: function () {
+          return 'rectangle';
         }
       }
     });

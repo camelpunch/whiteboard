@@ -3,17 +3,10 @@
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
-  WHITEBOARD.createShapeHandler = function (canvasEl, events) {
-    jQuery(canvasEl).on('mousedown', 'rect', function (event) {
+  WHITEBOARD.createShapeHandler = function (canvasEl, shapes, events) {
+    jQuery(canvasEl).on('mousedown', 'rect,ellipse', function (event) {
       events.fire('selectShapeToken',
-                  WHITEBOARD.createRectangle(event.currentTarget),
-                  event.offsetX,
-                  event.offsetY);
-    });
-
-    jQuery(canvasEl).on('mousedown', 'ellipse', function (event) {
-      events.fire('selectShapeToken',
-                  WHITEBOARD.createEllipse(event.currentTarget),
+                  shapes.shapeForNode(event.currentTarget),
                   event.offsetX,
                   event.offsetY);
     });

@@ -3,15 +3,16 @@
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
-  WHITEBOARD.createRectangleFactory = function (canvas) {
+  WHITEBOARD.createShapeFactory = function (canvasEl, collection, builder) {
     return {
       build: function (dimensions) {
-        var shape = WHITEBOARD.createRectangle(dimensions);
-        canvas.add(shape);
+        var shape = builder(canvasEl, dimensions);
+        collection.add(shape);
         return shape;
       },
+
       destroy: function (shape) {
-        canvas.remove(shape);
+        collection.remove(shape);
       }
     };
   };

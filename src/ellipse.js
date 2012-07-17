@@ -3,9 +3,8 @@
   "use strict";
   window.WHITEBOARD = window.WHITEBOARD || {};
 
-  WHITEBOARD.createEllipse = function (arg) {
-    var dimensions,
-      svgShape,
+  WHITEBOARD.createEllipse = function (canvasEl, arg) {
+    var dimensions, svgShape,
       namespace = "http://www.w3.org/2000/svg",
       shapeFromDimensions = function (dimensions) {
         var radiusX = dimensions.width / 2,
@@ -29,9 +28,15 @@
       );
 
     return Object.create({}, {
-      node: {
-        value: svgShape,
-        enumerable: true
+      render: {
+        value: function () {
+          canvasEl.appendChild(svgShape);
+        }
+      },
+      remove: {
+        value: function () {
+          canvasEl.removeChild(svgShape);
+        }
       },
       dimensions: {
         get: function () {
@@ -53,6 +58,11 @@
         value: function (x, y) {
           svgShape.setAttribute('cx', x + svgShape.rx.baseVal.value);
           svgShape.setAttribute('cy', y + svgShape.ry.baseVal.value);
+        }
+      },
+      toString: {
+        value: function () {
+          return 'ellipse';
         }
       }
     });

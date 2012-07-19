@@ -27,23 +27,31 @@
       });
 
     menu
-      .tells(plotters, { to: 'switch', on: 'selectShapeType' })
-      .tells(drawVector, { to: 'waitForDrag', on: 'selectShapeType' })
-      .tells(canvas, { to: 'enterDrawState', on: 'selectShapeType' })
-      .tells(canvas, { on: 'selectAction' });
+      .on('selectShapeType',
+          { tells: plotters, to: 'switch' },
+          { tells: drawVector, to: 'waitForDrag' },
+          { tells: canvas, to: 'enterDrawState' })
+      .on('selectAction',
+          { tells: canvas });
 
     drawVector
-      .tells(plotters.current, { to: 'beginDrawing', on: 'start' })
-      .tells(plotters.current, { to: 'resize', on: 'tick' })
-      .tells(plotters.current, { to: 'resize', on: 'complete' })
-      .tells(canvas, { to: 'exitDrawState', on: 'complete' });
+      .on('start',
+          { tells: plotters.current, to: 'beginDrawing' })
+      .on('tick',
+          { tells: plotters.current, to: 'resize' })
+      .on('complete',
+          { tells: plotters.current, to: 'resize' },
+          { tells: canvas, to: 'exitDrawState' });
 
     shapeHandler
-      .tells(moveVector, { to: 'waitForMove', on: 'selectShapeToken' })
-      .tells(shapePositioner, { to: 'setShapeAndStartCoords', on: 'selectShapeToken' });
+      .on('selectShapeToken',
+          { tells: moveVector, to: 'waitForMove' },
+          { tells: shapePositioner, to: 'setShapeAndStartCoords' });
 
     moveVector
-      .tells(shapePositioner, { to: 'reposition', on: 'tick' })
-      .tells(shapePositioner, { to: 'reposition', on: 'complete' });
+      .on('tick',
+          { tells: shapePositioner, to: 'reposition' })
+      .on('complete',
+          { tells: shapePositioner, to: 'reposition' });
   };
 }());

@@ -6,12 +6,12 @@
     var app, registry;
 
     beforeEach(function () {
-      registry = jasmine.createSpyObj('registry', ['tells', 'fire']);
+      registry = jasmine.createSpyObj('registry', ['on', 'fire']);
     });
 
-    it("exposes the tells method", function () {
+    it("exposes the on method", function () {
       var menu = WHITEBOARD.createMenu(app, registry);
-      expect(menu.tells).toBe(registry.tells);
+      expect(menu.on).toBe(registry.on);
     });
 
     it("does not expose the fire method", function () {

@@ -7,17 +7,25 @@
     var listeners = [];
 
     return {
-      tells: function (listener, options) {
-        listeners.push({
-          event: options.on,
-          listener: listener,
-          message: options.to
-        });
+      on: function () {
+        var args = Array.prototype.slice.apply(arguments),
+          event = args.shift(),
+          options;
+
+        while (args.length > 0) {
+          options = args.shift();
+          listeners.push({
+            event: event,
+            listener: options.tells,
+            message: options.to
+          });
+        }
+
         return this;
       },
 
       fire: function () {
-        var args = Array.prototype.slice.call(arguments),
+        var args = Array.prototype.slice.apply(arguments),
           event = args[0],
           callArgs = args.slice(1),
           callMethod = function (obj) {

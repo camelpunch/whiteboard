@@ -49,8 +49,8 @@
       expect(registry.fire.callCount).toBe(1);
     });
 
-    it("exposes a tells method", function () {
-      expect(shapeHandler.tells).toBe(registry.tells);
+    it("exposes a on method", function () {
+      expect(shapeHandler.on).toBe(registry.on);
     });
 
     it("does not expose the fire method", function () {

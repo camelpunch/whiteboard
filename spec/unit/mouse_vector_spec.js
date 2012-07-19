@@ -7,13 +7,13 @@
       ns = "http://www.w3.org/2000/svg";
 
     beforeEach(function () {
-      registry = jasmine.createSpyObj('registry', ['tells', 'fire']);
+      registry = jasmine.createSpyObj('registry', ['on', 'fire']);
       el = document.createElementNS(ns, 'svg');
       vector = WHITEBOARD.createMouseVector(el, registry);
     });
 
-    it("exposes the tells method", function () {
-      expect(vector.tells).toBe(registry.tells);
+    it("exposes the on method", function () {
+      expect(vector.on).toBe(registry.on);
     });
 
     it("does not expose the fire method", function () {

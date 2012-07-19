@@ -21,7 +21,7 @@
       };
 
     return {
-      tells: events.tells,
+      on: events.on,
       waitForMove: function () {
         state = 'started';
         moveable(el);

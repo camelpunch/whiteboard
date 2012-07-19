@@ -9,9 +9,11 @@
         registry = WHITEBOARD.createEventRegistry();
 
       registry
-        .tells(listener, { to: 'sleep', on: 'squareCreated' })
-        .tells(listener, { to: 'goFish', on: 'squareCreated' })
-        .tells(listener, { to: 'unwind', on: 'circleCreated' });
+        .on('squareCreated',
+            { tells: listener, to: 'sleep' },
+            { tells: listener, to: 'goFish' })
+        .on('circleCreated',
+            { tells: listener, to: 'unwind' });
 
       registry.fire('squareCreated', 'myarg1', 'myarg2');
 
@@ -27,8 +29,9 @@
         listenerObject = jasmine.createSpyObj('listener object', ['sleep']),
         registry = WHITEBOARD.createEventRegistry();
 
-      registry.tells(listenerFunction,
-                     { to: 'sleep', on: 'squareCreated' });
+      registry
+        .on('squareCreated',
+            { tells: listenerFunction, to: 'sleep' });
 
       listenerFunction.andReturn(listenerObject);
       registry.fire('squareCreated', 'myarg1', 'myarg2', 'myarg3');
@@ -41,7 +44,7 @@
         listenerObject = jasmine.createSpyObj('listener object', ['sleep']),
         registry = WHITEBOARD.createEventRegistry();
 
-      registry.tells(listenerFunction, { on: 'squareCreated' });
+      registry.on('squareCreated', { tells: listenerFunction });
 
       listenerFunction.andReturn(listenerObject);
       registry.fire('squareCreated', 'sleep', 'myarg1', 'myarg2');

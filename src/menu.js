@@ -12,6 +12,6 @@
       events.fire('selectAction', event.currentTarget.id);
     });
 
-    return { tells: events.tells };
+    return { on: events.on };
   };
 }());
